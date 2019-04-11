@@ -75,9 +75,11 @@ function onMessageReceived(payload) {
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
+        appendText(message, messageElement);
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
+        appendText(message, messageElement);
     } else {
         messageElement.classList.add('chat-message');
 
@@ -92,8 +94,16 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
-    }
+        var messageText = document.createTextNode(message.content);
 
+        var receiver = messageText.data.split(":")[1];
+        if(username == receiver || message.sender == username) {
+            appendText(message, messageElement);
+        }
+    }
+}
+
+function appendText(message, messageElement) {
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
