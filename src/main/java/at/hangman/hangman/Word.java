@@ -1,11 +1,12 @@
 package at.hangman.hangman;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Word {
     private String word;
     private int score;
-    private List<String> tags;
+    private List<String> tags = new ArrayList<>();
     private boolean isNoun = false;
 
     public Word(String word, int score, List<String> tags) {
@@ -16,6 +17,11 @@ public class Word {
     }
 
     private void checkForNoun(){
+        if(this.tags==null)
+        {
+            this.isNoun = false;
+            return;
+        }
         this.isNoun = this.tags.stream().anyMatch(m -> m.toLowerCase().equals("n"));
     }
 

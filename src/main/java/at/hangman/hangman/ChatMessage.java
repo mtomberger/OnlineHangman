@@ -8,6 +8,7 @@ public class ChatMessage {
     public enum MessageType {
         CHAT,
         JOIN,
+        ERROR,
         LEAVE
     }
 

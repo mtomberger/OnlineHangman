@@ -1,5 +1,6 @@
 package at.hangman.hangman;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -61,6 +62,8 @@ public class ChatController {
 
         String checkJson = GetWordCheckJson(word);
         if(!checkForAlloowedWord(checkJson,word)){
+            chatMessage.setType(ChatMessage.MessageType.ERROR);
+            chatMessage.setContent("We can't find your Word in the dictionary");
             return chatMessage;
         }
         boolean userAdded = false;
@@ -78,7 +81,6 @@ public class ChatController {
             neuerRaum[0] = username;
             raeume.add(neuerRaum);
             logger.info(username + " kam ins spiel dazu, er eröffnet einen neuen Raum ");
-
         }
 
         return chatMessage;
@@ -89,7 +91,7 @@ public class ChatController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            words = objectMapper.readValue(wordsJson, words.getClass());
+            words = objectMapper.readValue(wordsJson, new TypeReference<List<Word>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,7 +105,7 @@ public class ChatController {
             word = URLEncoder.encode(word, StandardCharsets.UTF_8.toString());
         } catch (UnsupportedEncodingException e) {
         }
-        final String uri = "https://api.datamuse.com/words?sp="+word+"&md=p";
+        final String uri = "https://api.datamuse.com/words?sp="+word+"&md=p&v=enwiki";
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, String.class);
     }

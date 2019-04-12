@@ -40,6 +40,17 @@ h2{
     margin-top: 20px;
     user-select: none;
 }
+.error-message{
+    text-align: center;
+    color: #D00;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 160%;
+    background: rgba(255,255,255,0.3);
+}
+.error-message:empty{
+    margin: 0px;
+}
 .gamestart-board{
     user-select: none;
     position: absolute;
@@ -82,7 +93,7 @@ h2{
     background: rgba(255,255,255,0.1);
 }
 
-.gamestart-button{
+.gamestart-button,.scores-button{
     display: inline-block;
     width: 320px;
     height: 60px;
@@ -102,7 +113,13 @@ h2{
     font-size: 26px;
     cursor: pointer;
 }
-.gamestart-button:hover{
+.scores-button{
+    width: 150px;
+    height: 35px;
+    line-height: 20px;
+    font-size: 16px;
+}
+.gamestart-button:hover,.scores-button:hover{
     background-color: rgba(255,255,255,0.5);
     border: 5px solid transparent;
 }

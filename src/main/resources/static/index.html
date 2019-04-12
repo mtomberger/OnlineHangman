@@ -18,19 +18,19 @@
     </div>
     <div class="loading chalkboardBackground hidden">
         <div class="hangman">
-            <div class="hangman-part circ hill infiniteanimation "></div>
-            <div class="hangman-part vert gallow1 infiniteanimation "></div>
-            <div class="hangman-part hor gallow2 infiniteanimation "></div>
-            <div class="hangman-part tilt135 gallow3 infiniteanimation "></div>
-            <div class="hangman-part vert gallow4 infiniteanimation "></div>
-            <div class="hangman-part circ head infiniteanimation "></div>
-            <div class="hangman-part vert body infiniteanimation "></div>
-            <div class="hangman-part tilt225 hand1 infiniteanimation "></div>
-            <div class="hangman-part tilt135 hand2 infiniteanimation "></div>
-            <div class="hangman-part tilt225 foot1 infiniteanimation "></div>
-            <div class="hangman-part tilt135 foot2 infiniteanimation "></div>
+            <div class="hangman-part circ hill draw-part"></div>
+            <div class="hangman-part vert gallow1 draw-part"></div>
+            <div class="hangman-part hor gallow2 draw-part"></div>
+            <div class="hangman-part tilt135 gallow3 draw-part"></div>
+            <div class="hangman-part vert gallow4 draw-part"></div>
+            <div class="hangman-part circ head draw-part"></div>
+            <div class="hangman-part vert body draw-part"></div>
+            <div class="hangman-part tilt225 hand1 draw-part"></div>
+            <div class="hangman-part tilt135 hand2 draw-part"></div>
+            <div class="hangman-part tilt225 foot1 draw-part"></div>
+            <div class="hangman-part tilt135 foot2 draw-part"></div>
+            <h1>Loading...</h1>
         </div>
-        <h2>Loading...</h2>
     </div>
     <div class="gamestart-board">
         <form id="usernameForm" name="usernameForm">
@@ -39,11 +39,14 @@
             <br/>
             <input class="playername-input" name="word" id="word" placeholder="Your word" autocomplete="off" value="word"/>
             <br/>
+            <p class="error-message"></p>
             <button type="submit" class="gamestart-button">Start Game</button>
+            <br/>
             <button class="scores-button">Scores</button>
         </form>
+
     </div>
-    <div class="gameBoard hidden">
+    <div class="game-board hidden">
         <div class="player-container">
             <div class="guessed"></div>
             <div class="hangman"></div>
@@ -56,7 +59,7 @@
         </div>
 
     </div>
-    <div class="scoreBoard hidden">
+    <div class="score-board hidden">
 
     </div>
 </div>
