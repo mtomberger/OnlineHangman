@@ -1,53 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Spring Boot WebSocket Chat Application</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Spring Boot WebSocket Chat Application</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <title>Online Hangman</title>
+    </head>
 </head>
 <body>
 <noscript>
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
-
-<div id="username-page">
-    <div class="username-page-container">
-        <h1 class="title">Type your username</h1>
+<div class="chalkboard chalkboardBackground">
+    <div class="board-header">
+        <h1>Online Hangman</h1>
+    </div>
+    <div class="loading chalkboardBackground hidden">
+        <div class="hangman">
+            <div class="hangman-part circ hill infiniteanimation "></div>
+            <div class="hangman-part vert gallow1 infiniteanimation "></div>
+            <div class="hangman-part hor gallow2 infiniteanimation "></div>
+            <div class="hangman-part tilt135 gallow3 infiniteanimation "></div>
+            <div class="hangman-part vert gallow4 infiniteanimation "></div>
+            <div class="hangman-part circ head infiniteanimation "></div>
+            <div class="hangman-part vert body infiniteanimation "></div>
+            <div class="hangman-part tilt225 hand1 infiniteanimation "></div>
+            <div class="hangman-part tilt135 hand2 infiniteanimation "></div>
+            <div class="hangman-part tilt225 foot1 infiniteanimation "></div>
+            <div class="hangman-part tilt135 foot2 infiniteanimation "></div>
+        </div>
+        <h2>Loading...</h2>
+    </div>
+    <div class="gamestart-board">
         <form id="usernameForm" name="usernameForm">
-            <div class="form-group">
-                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
-            </div>
-            <div class="form-group">
-                <button type="submit" class="accent username-submit">Start Chatting</button>
-            </div>
+            <h2>Input your Playername and a word to start playing</h2>
+            <input class="playername-input" name="player-name" id="name" placeholder="Playername" autocomplete="off" value="Player"/>
+            <br/>
+            <input class="playername-input" name="word" id="word" placeholder="Your word" autocomplete="off" value="word"/>
+            <br/>
+            <button type="submit" class="gamestart-button">Start Game</button>
+            <button class="scores-button">Scores</button>
         </form>
     </div>
-</div>
-
-<div id="chat-page" class="hidden">
-    <div class="chat-container">
-        <div class="chat-header">
-            <h2>Spring WebSocket Chat Demo</h2>
+    <div class="gameBoard hidden">
+        <div class="player-container">
+            <div class="guessed"></div>
+            <div class="hangman"></div>
+            <div class="word"></div>
         </div>
-        <div class="connecting">
-            Connecting...
+        <div class="enemy-container">
+            <div class="guessed"></div>
+            <div class="hangman"></div>
+            <div class="word"></div>
         </div>
-        <ul id="messageArea">
 
-        </ul>
-        <form id="messageForm" name="messageForm">
-            <div class="form-group">
-                <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                    <button type="submit" class="primary">Send</button>
-                </div>
-            </div>
-        </form>
+    </div>
+    <div class="scoreBoard hidden">
+
     </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>
