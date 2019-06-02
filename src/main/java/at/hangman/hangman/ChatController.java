@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ChatController {
@@ -34,18 +31,18 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         if(ChatMessage.MessageType.CHAT.equals(chatMessage.getType())) {
-            String receiver = "";
+            String receiverId = "";
             for(Room room : rooms) {
-                if(chatMessage.getSender().equals(room.getPlayer1Name())) {
-                    receiver = room.getPlayer2Name();
+                if(room.getPlayers().size() == 1 && chatMessage.getSender().equals(room.getPlayers().get(0).getId())) {
+                    receiverId = room.getPlayers().get(0).getId();
                 }
 
-                if(chatMessage.getSender().equals(room.getPlayer2Name())) {
-                    receiver = room.getPlayer1Name();
+                if(room.getPlayers().size() > 1 && chatMessage.getSender().equals(room.getPlayers().get(1).getId())) {
+                    receiverId = room.getPlayers().get(1).getId();
                 }
             }
 
-            chatMessage.setContent(chatMessage.getContent() + ":" + receiver);
+            chatMessage.setContent(chatMessage.getContent() + ":" + receiverId);
         }
 
         return chatMessage;
@@ -59,34 +56,28 @@ public class ChatController {
         String username = chatMessage.getSender();
         String word = chatMessage.getContent();
 
-        String checkJson = GetWordCheckJson(word);
+        String checkJson = getWordCheckJson(word);
         if(!checkForAlloowedWord(checkJson,word)){
             chatMessage.setType(ChatMessage.MessageType.ERROR);
             chatMessage.setContent("We can't find your Word in the dictionary");
             return chatMessage;
         }
-        boolean userAdded = false;
 
-        for(Room room : rooms) {
-            if(StringUtils.isEmpty(room.getPlayer2Name()) && !userAdded) {
-                room.setPlayer2Name(username);
-                room.setGetWordForPlayer1(chatMessage.getContent());
-                userAdded = true;
-                logger.info(username + " kam ins spiel dazu, er geht in den Raum von " + room.getPlayer1Name());
-                chatMessage.setContent(room.getPlayer1Name() + "/" + room.getPlayer2Name());
-            }
-        }
+        Optional<Room> room = rooms.stream().filter(r -> r.maxPlayersReached()).findFirst();
 
-        if(userAdded == false) {
-            Room newRoom = new Room();
-            newRoom.setPlayer1Name(username);
-            newRoom.setWordForPlayer2(chatMessage.getContent());
-            rooms.add(newRoom);
-            logger.info(username + " kam ins spiel dazu, er eröffnet einen neuen Raum ");
-            chatMessage.setContent("Waiting for another player");
-        }
+       if(room.isEmpty()) {
+           Room newRoom = new Room();
+           newRoom.addPlayer(username, chatMessage.getContent());
+           rooms.add(newRoom);
+           logger.info(username + " kam ins spiel dazu, er eröffnet einen neuen Raum ");
+           chatMessage.setContent("Waiting for another player");
+       } else {
+           room.get().addPlayer(username, chatMessage.getContent());
+           logger.info(username + " kam ins spiel dazu, er geht in den Raum von " + room.get().getPlayers().get(0).getName());
+           chatMessage.setContent(username + "/" + room.get().getPlayers().get(0).getName());
+       }
 
-        return chatMessage;
+       return chatMessage;
     }
     private boolean checkForAlloowedWord(String wordsJson,String word){
         word = word.toLowerCase();
@@ -101,7 +92,7 @@ public class ChatController {
         String finalWord = word;
         return words.stream().anyMatch(w -> w.isNoun() && w.getWord().toLowerCase().equals(finalWord));
     }
-    private String GetWordCheckJson(String word){
+    private String getWordCheckJson(String word){
 
         word = word.toLowerCase();
         try {
