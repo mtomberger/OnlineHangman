@@ -10,6 +10,7 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
+var word = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -18,6 +19,7 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
+    word = document.querySelector('#word').value.trim();
 
     if(username) {
         usernamePage.classList.add('hidden');
@@ -39,7 +41,7 @@ function onConnected() {
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
-        JSON.stringify({sender: username, type: 'JOIN'})
+        JSON.stringify({sender: username, content: word, type: 'JOIN'})
     )
 
     connectingElement.classList.add('hidden');
