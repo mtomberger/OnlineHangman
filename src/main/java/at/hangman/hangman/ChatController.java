@@ -34,7 +34,6 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         if(ChatMessage.MessageType.CHAT.equals(chatMessage.getType())) {
-
             String receiver = "";
             for(Room room : rooms) {
                 if(chatMessage.getSender().equals(room.getPlayer1Name())) {

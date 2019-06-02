@@ -92,9 +92,15 @@ function onMessageReceived(payload) {
         messageElement.classList.add('event-message');
         var messagetext = message.content;
         var messageparts = messagetext.split("/");
+
         var newParts = messageparts.filter(f => f.trim() !== username);
         messagetext = newParts.join(" ");
-        roominfo.text(messagetext);
+
+        if(message.content.indexOf("/") > -1) {
+            roominfo.text("You will play with " + messagetext);
+        } else {
+            roominfo.text(messagetext);
+        }
     }
     if(message.type === 'ERROR') {
         stompClient.disconnect(function(){
