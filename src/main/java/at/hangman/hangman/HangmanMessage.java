@@ -16,6 +16,7 @@ public class HangmanMessage {
         PLAY,
         ID,
         JOIN,
+        INIT,
         ERROR,
         LEAVE
     }

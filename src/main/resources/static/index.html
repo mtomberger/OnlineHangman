@@ -13,8 +13,10 @@
     <div class="chalkboard chalkboardBackground">
         <div class="board-header">
             <h1>Online Hangman</h1>
+            <h2 id="roominfo"></h2>
         </div>
         <div class="loading chalkboardBackground hidden">
+            <h1>Loading...</h1>
             <div class="hangman">
                 <div class="hangman-part circ hill draw-part"></div>
                 <div class="hangman-part vert gallow1 draw-part"></div>
@@ -27,7 +29,6 @@
                 <div class="hangman-part tilt135 hand2 draw-part"></div>
                 <div class="hangman-part tilt225 foot1 draw-part"></div>
                 <div class="hangman-part tilt135 foot2 draw-part"></div>
-                <h1>Loading...</h1>
             </div>
         </div>
         <div class="gamestart-board">
@@ -45,15 +46,41 @@
 
         </div>
         <div class="game-board hidden">
-            <p id="roominfo" />
             <div class="player-container">
-                <div class="guessed"></div>
-                <div class="hangman"></div>
+                <div class="choosen-letter hidden"></div>
+                <h3 id="player-info"></h3>
+                <div class="guessed" id="player-guessed"></div>
+                <div class="hangman">
+                    <div class="hangman-part circ hill"></div>
+                    <div class="hangman-part vert gallow1"></div>
+                    <div class="hangman-part hor gallow2"></div>
+                    <div class="hangman-part tilt135 gallow3"></div>
+                    <div class="hangman-part vert gallow4"></div>
+                    <div class="hangman-part circ head"></div>
+                    <div class="hangman-part vert body"></div>
+                    <div class="hangman-part tilt225 hand1"></div>
+                    <div class="hangman-part tilt135 hand2"></div>
+                    <div class="hangman-part tilt225 foot1"></div>
+                    <div class="hangman-part tilt135 foot2"></div>
+                </div>
                 <div class="word"></div>
             </div>
             <div class="enemy-container">
-                <div class="guessed"></div>
-                <div class="hangman"></div>
+                <h3 id="enemy-info"></h3>
+                <div class="guessed" id="enemy-guessed"></div>
+                <div class="hangman">
+                    <div class="hangman-part circ hill"></div>
+                    <div class="hangman-part vert gallow1"></div>
+                    <div class="hangman-part hor gallow2"></div>
+                    <div class="hangman-part tilt135 gallow3"></div>
+                    <div class="hangman-part vert gallow4"></div>
+                    <div class="hangman-part circ head"></div>
+                    <div class="hangman-part vert body"></div>
+                    <div class="hangman-part tilt225 hand1"></div>
+                    <div class="hangman-part tilt135 hand2"></div>
+                    <div class="hangman-part tilt225 foot1"></div>
+                    <div class="hangman-part tilt135 foot2"></div>
+                </div>
                 <div class="word"></div>
             </div>
 

@@ -45,17 +45,24 @@ public class HangmanController {
         ClientMessage returnMessage = new ClientMessage();
         hangmanMessage.setType(HangmanMessage.MessageType.JOIN);
         if(!room.isPresent()) {
+            //waiting for second player
            Room newRoom = new Room();
            newRoom.addPlayer(player);
            rooms.add(newRoom);
            logger.info(username + " kam ins spiel dazu, er eröffnet einen neuen Raum ");
-           hangmanMessage.setContent("Waiting for another player");
+           hangmanMessage.setContent("Waiting for another player...");
         } else {
+            // start game
            Player otherPlayer = room.get().getPlayers().get(0);
            room.get().addPlayer(player);
            logger.info(username + " kam ins spiel dazu, er geht in den Raum von " + otherPlayer.getName());
-           hangmanMessage.setContent("You will play against "+otherPlayer.getName());
-           returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.JOIN,"You will play against "+player.getName() ,otherPlayer.getId(),otherPlayer.getName()));
+
+           hangmanMessage.setContent(otherPlayer.getName());
+           returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.JOIN,player.getName() ,otherPlayer.getId(),otherPlayer.getName()));
+
+           // init game messages
+            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,otherPlayer.wordToGuessLength()+"#;#"+player.wordToGuessLength(),otherPlayer.getId(),otherPlayer.getName()));
+            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,player.wordToGuessLength()+"#;#"+otherPlayer.wordToGuessLength(),hangmanMessage.getSenderId(),player.getName()));
         }
         returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.ID,player.getId(),hangmanMessage.getSenderId(),username));
         returnMessage.addMessage(hangmanMessage);

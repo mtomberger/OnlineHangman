@@ -2,6 +2,7 @@ package at.hangman.hangman;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Player {
     private String id;
@@ -21,10 +22,6 @@ public class Player {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getMistakes() {
         return mistakes;
     }
@@ -39,6 +36,16 @@ public class Player {
 
     public String getChoosenWord() {
         return choosenWord;
+    }
+
+    public int wordToGuessLength(){
+        if(wordToGuess == null){
+            return 0;
+        }
+        return wordToGuess.length();
+    }
+    public String getGuessed(){
+        return guessedChars.stream().map(String::valueOf).collect(Collectors.joining(","));
     }
 
     public boolean guessLetter(char letter){
