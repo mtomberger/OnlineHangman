@@ -69,11 +69,12 @@ public class ChatController {
         boolean userAdded = false;
 
         for(Room room : rooms) {
-            if(StringUtils.isEmpty(room.getPlayer2Name())) {
+            if(StringUtils.isEmpty(room.getPlayer2Name()) && !userAdded) {
                 room.setPlayer2Name(username);
                 room.setGetWordForPlayer1(chatMessage.getContent());
                 userAdded = true;
                 logger.info(username + " kam ins spiel dazu, er geht in den Raum von " + room.getPlayer1Name());
+                chatMessage.setContent(room.getPlayer1Name() + "/" + room.getPlayer2Name());
             }
         }
 
@@ -83,6 +84,7 @@ public class ChatController {
             newRoom.setWordForPlayer2(chatMessage.getContent());
             rooms.add(newRoom);
             logger.info(username + " kam ins spiel dazu, er eröffnet einen neuen Raum ");
+            chatMessage.setContent("Waiting for another player");
         }
 
         return chatMessage;

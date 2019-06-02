@@ -4,6 +4,7 @@ var gamePage = $('.game-board');
 var joinPage = $('.gamestart-board');
 var scorePage = $('score-board');
 var loadingOverlay = $('.loading');
+var roominfo = $('#roominfo');
 var isConnected = false;
 var stompClient = null;
 var username = null;
@@ -89,8 +90,11 @@ function onMessageReceived(payload) {
 
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' joined!';
-        appendText(message, messageElement);
+        var messagetext = message.content;
+        var messageparts = messagetext.split("/");
+        var newParts = messageparts.filter(f => f.trim() !== username);
+        messagetext = newParts.join(" ");
+        roominfo.text(messagetext);
     }
     if(message.type === 'ERROR') {
         stompClient.disconnect(function(){
