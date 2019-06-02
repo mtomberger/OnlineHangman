@@ -2,6 +2,7 @@ package at.hangman.hangman;
 
 public class ChatMessage {
     private MessageType type;
+    private String room;
     private String content;
     private String sender;
 
@@ -10,6 +11,14 @@ public class ChatMessage {
         JOIN,
         ERROR,
         LEAVE
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 
     public MessageType getType() {
