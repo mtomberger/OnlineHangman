@@ -33,9 +33,9 @@
         <div class="gamestart-board">
             <form id="usernameForm" name="usernameForm">
                 <h2>Input your Playername and a word to start playing</h2>
-                <input class="playername-input" name="player-name" id="name" placeholder="Playername" autocomplete="off" value="Player"/>
+                <input class="playername-input" name="player-name" id="name" placeholder="Playername" autocomplete="off" value="Player" required pattern="[A-Za-z0-9]+"/>
                 <br/>
-                <input class="playername-input" name="word" id="word" placeholder="Your word" autocomplete="off" value="word"/>
+                <input class="playername-input" name="word" id="word" placeholder="Your word" autocomplete="off" value="word" required pattern="[A-Za-z]+"/>
                 <br/>
                 <p class="error-message"></p>
                 <button type="submit" class="gamestart-button">Start Game</button>

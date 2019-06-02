@@ -16,6 +16,9 @@ public class Room {
 
     public void addPlayer(String name, String choosenWord){
         Player p = new Player(name, choosenWord);
+        addPlayer(p);
+    }
+    public void addPlayer(Player p){
         if(maxPlayersReached()){
             return;
         }
@@ -25,11 +28,11 @@ public class Room {
 
     public void setGuessWord() {
         if(maxPlayersReached()) {
-            Player player1 = players.get(0);
-            Player player2 = players.get(1);
-
-            player1.setWordToGuess(player2.getChoosenWord());
-            player2.setWordToGuess(player1.getChoosenWord());
+            Player nextP = players.get(players.size()-1);
+            for(Player p : players){
+                p.setWordToGuess(nextP.getChoosenWord());
+                nextP = p;
+            }
         }
     }
 
@@ -40,10 +43,6 @@ public class Room {
 
     public List<Player> getPlayers() {
         return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
     }
 
     public String getId() {

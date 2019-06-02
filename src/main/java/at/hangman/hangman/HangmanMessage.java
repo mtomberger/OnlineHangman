@@ -1,24 +1,41 @@
 package at.hangman.hangman;
 
-public class ChatMessage {
+import java.util.ArrayList;
+
+public class HangmanMessage {
     private MessageType type;
-    private String room;
+
     private String content;
+
+    //client id
+    private String senderId;
+    //username
     private String sender;
 
     public enum MessageType {
-        CHAT,
+        PLAY,
+        ID,
         JOIN,
         ERROR,
         LEAVE
     }
 
-    public String getRoom() {
-        return room;
+    public HangmanMessage() {
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public HangmanMessage(MessageType type, String content, String senderId, String sender) {
+        this.type = type;
+        this.content = content;
+        this.senderId = senderId;
+        this.sender = sender;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
     public MessageType getType() {
