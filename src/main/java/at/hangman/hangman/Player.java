@@ -1,10 +1,14 @@
 package at.hangman.hangman;
 
+import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
+
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Player {
+    private final int MAX_MISTAKES = 10;
+
     private String id;
     private String wordToGuess;
     private String choosenWord;
@@ -45,23 +49,46 @@ public class Player {
         return wordToGuess.length();
     }
     public String getGuessed(){
-        return guessedChars.stream().map(String::valueOf).collect(Collectors.joining(","));
+        return guessedChars.stream().map(c -> String.valueOf(c).toUpperCase()).collect(Collectors.joining(","));
+    }
+    public FinishState getFinishState(){
+        if(mistakes > MAX_MISTAKES){
+            return FinishState.LOST;
+        }
+        if(false){
+            return FinishState.WON;
+        }
+        return FinishState.NOTFINISHED;
     }
 
-    public boolean guessLetter(char letter){
+    public String guessLetter(char letter) throws GuessingException {
         letter = Character.toLowerCase(letter);
+        ArrayList<Integer> letterIndexes = new ArrayList<>();
         if(wordToGuess==null) {
-            return false;
+            throw new GuessingException();
         }
-        if(guessedChars.contains(letter)){
-            return true;
+        int index = wordToGuess.toLowerCase().indexOf(letter);
+        while (index >= 0) {
+            System.out.println(index);
+            letterIndexes.add(index);
+            index = wordToGuess.toLowerCase().indexOf(letter, index + 1);
         }
-        guessedChars.add(letter);
-        if(wordToGuess.toLowerCase().indexOf(letter)>-1){
-            return true;
+        if(!guessedChars.contains(letter)){
+            guessedChars.add(letter);
+            if(letterIndexes.size()<=0){
+                mistakes++;
+            }
         }
-        mistakes++;
-        return false;
+        return letterIndexes.stream().map(String::valueOf).collect(Collectors.joining(","));
     }
+
+}
+enum FinishState{
+    NOTFINISHED,
+    WON,
+    LOST,
+
+}
+class GuessingException extends Exception{
 
 }

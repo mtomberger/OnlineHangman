@@ -49,7 +49,6 @@ function onConnected() {
     playerinfo.text(username);
     loadingOverlay.addClass('hidden');
     isConnected = true;
-    initTyping();
 }
 function onMessageReceived(message){
     if(message.type === 'ID'){
@@ -65,6 +64,27 @@ function onMessageReceived(message){
         var enemyWord = messagetext.split('#;#')[1];
         createWordDisplay($('.player-container .word'),myWord);
         createWordDisplay($('.enemy-container .word'),enemyWord);
+        initTyping();
+    }
+    if(message.type === 'PLAY'){
+        var messagecontents = message.content.split('#;#');
+        var lastGuess = messagecontents[0];
+        var allGuessed = messagecontents[1];
+        var guessedIndex = messagecontents[2].split(",");
+        var playerId = messagecontents[3];
+        var containerToWrite = playerId == clientId ? $(".player-container") : $(".enemy-container");
+        containerToWrite.find(".guessed").text(allGuessed);
+        if(guessedIndex.length==1 && guessedIndex[0]== ""){
+            drawMistake(containerToWrite.find(".hangman"));
+        }else{
+            containerToWrite.find(".word .letter").each(function(i){
+                if(guessedIndex.filter(x => x == i).length>0){
+                    $(this).text(lastGuess);
+                }
+            });
+        }
+
+        enemyinfo.text(messagetext);
     }
     if(message.type === 'ERROR') {
         stompClient.disconnect(function(){
@@ -83,6 +103,17 @@ function onMessagesReceived(payload) {
 }
 function onLetterChoosen(letter){
     console.log("LETTER: "+letter);
+    if(stompClient) {
+        var chatMessage = {
+            messages:[{
+                senderId: clientId,
+                sender: username,
+                content: letter,
+                type: 'PLAY'
+            }]
+        };
+        stompClient.send("/app/hangman.guessLetter", {}, JSON.stringify(chatMessage));
+    }
 }
 function createWordDisplay(container,len){
     var appendHTML = "";
@@ -164,7 +195,7 @@ function initTyping(){
             setTimeout(function(){
                 typingAvailable = true;
                 roominfo.text(typeInfoText);
-            },2500);
+            },1500);
         }
 
         if(pressedKey){

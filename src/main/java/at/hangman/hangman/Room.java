@@ -2,7 +2,9 @@ package at.hangman.hangman;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Room {
 
@@ -14,10 +16,6 @@ public class Room {
         id = UUID.randomUUID().toString().replace("-", "");
     }
 
-    public void addPlayer(String name, String choosenWord){
-        Player p = new Player(name, choosenWord);
-        addPlayer(p);
-    }
     public void addPlayer(Player p){
         if(maxPlayersReached()){
             return;
@@ -40,7 +38,17 @@ public class Room {
         return players.size() >= PLAYERS_PER_ROOM;
 
     }
-
+    public boolean hasPlayer(String playerId){
+        boolean x =players.stream().anyMatch(p -> p.getId().equals(playerId));
+       return x;
+    }
+    public Player getPlayer(String playerId){
+        Optional<Player> searched =  players.stream().filter(p -> p.getId().equals(playerId)).findFirst();
+        if(!searched.isPresent()){
+            return null;
+        }
+        return searched.get();
+    }
     public List<Player> getPlayers() {
         return players;
     }

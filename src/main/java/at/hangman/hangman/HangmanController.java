@@ -22,6 +22,7 @@ import java.util.*;
 public class HangmanController {
 
     private List<Room> rooms = new ArrayList<>();
+    private final String MESSAGE_DELIMITER="#;#";
     private static final Logger logger = LoggerFactory.getLogger(HangmanController.class);
 
     @MessageMapping("/hangman.addUser")
@@ -61,8 +62,8 @@ public class HangmanController {
            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.JOIN,player.getName() ,otherPlayer.getId(),otherPlayer.getName()));
 
            // init game messages
-            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,otherPlayer.wordToGuessLength()+"#;#"+player.wordToGuessLength(),otherPlayer.getId(),otherPlayer.getName()));
-            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,player.wordToGuessLength()+"#;#"+otherPlayer.wordToGuessLength(),hangmanMessage.getSenderId(),player.getName()));
+            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,otherPlayer.wordToGuessLength()+MESSAGE_DELIMITER+player.wordToGuessLength(),otherPlayer.getId(),otherPlayer.getName()));
+            returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.INIT,player.wordToGuessLength()+MESSAGE_DELIMITER+otherPlayer.wordToGuessLength(),hangmanMessage.getSenderId(),player.getName()));
         }
         returnMessage.addMessage(new HangmanMessage(HangmanMessage.MessageType.ID,player.getId(),hangmanMessage.getSenderId(),username));
         returnMessage.addMessage(hangmanMessage);
@@ -71,7 +72,49 @@ public class HangmanController {
 
 
 
+    @MessageMapping("/hangman.guessLetter")
+    @SendTo("/hangman/public")
+    public ClientMessage guessLetter(@Payload ClientMessage clientMessage, SimpMessageHeaderAccessor headerAccessor){
+        HangmanMessage hangmanMessage = clientMessage.getFirstMessage();
+        ClientMessage returnMessages = new ClientMessage();
+        String sender = hangmanMessage.getSenderId();
+        Optional<Room>  searchedRoom = rooms.stream().filter(r -> r.hasPlayer(sender)).findFirst();
+        if(!searchedRoom.isPresent()){
+            return returnMessages;
+        }
+        Room playedRoom = searchedRoom.get();
+        Player currentPlayer = playedRoom.getPlayer(sender);
+        StringBuilder message = new StringBuilder();
+        message.append(hangmanMessage.getContent().charAt(0));
+        message.append(MESSAGE_DELIMITER);
 
+        try {
+           String indexes = currentPlayer.guessLetter(hangmanMessage.getContent().charAt(0));
+
+            message.append(currentPlayer.getGuessed());
+            message.append(MESSAGE_DELIMITER);
+            message.append(indexes);
+            message.append(MESSAGE_DELIMITER);
+            message.append( currentPlayer.getId());
+
+            for(Player p : playedRoom.getPlayers()){
+                returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.PLAY,message.toString(),p.getId(),p.getName()));
+            }
+        } catch (GuessingException e) {
+
+            message.append(currentPlayer.getGuessed());
+            message.append(MESSAGE_DELIMITER);
+            message.append(MESSAGE_DELIMITER);
+            message.append( currentPlayer.getId());
+
+            returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.PLAY,message.toString(),currentPlayer.getId(),currentPlayer.getName()));
+            return returnMessages;
+        }
+
+        return returnMessages;
+
+
+    }
     private boolean checkForAllowedWord(String wordsJson,String word){
         word = word.toLowerCase();
         List<Word> words = new ArrayList<>();
