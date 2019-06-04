@@ -23,6 +23,9 @@ public class Room {
         players.add(p);
         setGuessWord();
     }
+    public long countPlayers(){
+        return players.stream().filter(p -> p!=null).count();
+    }
 
     public void setGuessWord() {
         if(maxPlayersReached()) {

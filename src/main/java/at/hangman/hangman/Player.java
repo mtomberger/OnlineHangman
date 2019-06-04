@@ -1,13 +1,13 @@
 package at.hangman.hangman;
 
-import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
+import at.hangman.exception.GuessingException;
 
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Player {
-    private final int MAX_MISTAKES = 10;
+    public static final int MAX_MISTAKES = 10;
 
     private String id;
     private String wordToGuess;
@@ -87,8 +87,5 @@ enum FinishState{
     NOTFINISHED,
     WON,
     LOST,
-
-}
-class GuessingException extends Exception{
 
 }
