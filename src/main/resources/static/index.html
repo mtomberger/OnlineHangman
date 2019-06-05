@@ -48,6 +48,10 @@
         <div class="game-board hidden">
             <div class="player-container">
                 <div class="choosen-letter hidden"></div>
+                <div class="finish hidden">
+                    <div class="finish-success hidden"><i class="fas fa-check"></i></div>
+                    <div class="finish-failed hidden"><i class="fas fa-times"></i></div>
+                </div>
                 <h3 id="player-info"></h3>
                 <div class="guessed" id="player-guessed"></div>
                 <div class="hangman">
@@ -83,12 +87,13 @@
                 </div>
                 <div class="word"></div>
             </div>
-
+            <div class="score-container"></div>
         </div>
         <div class="score-board hidden">
 
         </div>
     </div>
+        <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
