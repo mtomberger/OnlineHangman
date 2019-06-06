@@ -12,6 +12,11 @@ var stompClient = null;
 var username = null;
 var word = null;
 var clientId = generateGuid();
+var MESSAGE_DELIMITER = '#;#';
+var intervalId = 0;
+
+//disable logging
+console.log=function(){};
 
 function connect(event) {
     username =$('#name').val().trim();
@@ -60,14 +65,35 @@ function onMessageReceived(message){
     }
     if(message.type === 'INIT'){
         var messagetext = message.content;
-        var myWord = messagetext.split('#;#')[0];
-        var enemyWord = messagetext.split('#;#')[1];
+        var myWord = messagetext.split(MESSAGE_DELIMITER)[0];
+        var enemyWord = messagetext.split(MESSAGE_DELIMITER)[1];
         createWordDisplay($('.player-container .word'),myWord);
-        createWordDisplay($('.enemy-container .word'),enemyWord);
+        createWordDisplay($('.enemy-container .word'),enemyWord,word);
         initTyping();
     }
+    if(message.type === 'FINISH'){
+        resetTyping();
+        var neededMistakes = message.content.split(MESSAGE_DELIMITER)[0];
+        var availableMistakes = message.content.split(MESSAGE_DELIMITER)[1];
+        var toGuess = message.content.split(MESSAGE_DELIMITER)[2];
+        var state  = "' right. "+neededMistakes+" Letters were wrong.";
+        $('.finish').removeClass("hidden");
+        debugger;
+        if(neededMistakes>availableMistakes){
+            state  = "' wrong";
+            $('.finish-failed').removeClass("hidden");
+
+        }else{
+            $('.finish-success').removeClass("hidden");
+
+        }
+        roominfo.text("You guessed the word '" + toGuess+"' from '"+enemyinfo.text()+state);
+    }
+    if(message.type === 'SCORE'){
+        $('.score-container').html(message.content);
+    }
     if(message.type === 'PLAY'){
-        var messagecontents = message.content.split('#;#');
+        var messagecontents = message.content.split(MESSAGE_DELIMITER);
         var lastGuess = messagecontents[0];
         var allGuessed = messagecontents[1];
         var guessedIndex = messagecontents[2].split(",");
@@ -115,10 +141,11 @@ function onLetterChoosen(letter){
         stompClient.send("/app/hangman.guessLetter", {}, JSON.stringify(chatMessage));
     }
 }
-function createWordDisplay(container,len){
+function createWordDisplay(container,len, fill){
     var appendHTML = "";
     for(var i=0;i<len;i++){
-        appendHTML += '<span class="letter">&nbsp;</span>';
+        var addAttr = fill? 'data-letter="'+fill.charAt(i)+'"':'';
+        appendHTML += '<span class="letter" '+addAttr+'>&nbsp;</span>';
     }
     container.html(appendHTML);
 }
@@ -136,6 +163,10 @@ function drawMistake(hangman){
     setTimeout(function(p,rc){
         p.addClass(rc).addClass("draw-part");
     },0,part,removedClass);
+    $('.chalkboard').addClass('wrong');
+    setTimeout(function(){
+        $('.chalkboard').removeClass('wrong');
+    },500);
 }
 function onSocketError(error) {
     onError(error);
@@ -192,10 +223,10 @@ function initTyping(){
             $('.choosen-letter').addClass("hidden");
             typingAvailable = false;
             roominfo.text("Think about your choice");
-            setTimeout(function(){
+            intervalId = setTimeout(function(){
                 typingAvailable = true;
                 roominfo.text(typeInfoText);
-            },1500);
+            },1000);
         }
 
         if(pressedKey){
@@ -208,7 +239,10 @@ function initTyping(){
 function resetTyping(){
     chooseMode = false;
     typingAvailable = true;
+    $('.choosen-letter').addClass("hidden");
+    $('.choosen-letter').text("");
     $(document).off('keydown.choose');
+    clearTimeout(intervalId);
 }
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();

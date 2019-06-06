@@ -1,25 +1,34 @@
 package at.hangman.hangman;
 
 import at.hangman.exception.GuessingException;
+import at.hangman.exception.ScoreException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Player {
     public static final int MAX_MISTAKES = 10;
+    private static final Logger logger = LoggerFactory.getLogger(HangmanController.class);
 
     private String id;
+    private Date started;
+    private Date finished;
     private String wordToGuess;
     private String choosenWord;
     private int mistakes = 0;
     private String name;
     private ArrayList<Character> guessedChars = new ArrayList<>();
+    private boolean isFinished = false;
 
     public Player(String name, String choosenWord) {
         this.name = name;
         this.choosenWord = choosenWord;
         id = UUID.randomUUID().toString().replace("-", "");
+        started = new Date();
     }
 
     public String getId() {
@@ -42,6 +51,14 @@ public class Player {
         return choosenWord;
     }
 
+    public boolean isFinished() {
+        return isFinished;
+    }
+    private void setFinished(){
+        finished = new Date();
+        isFinished = true;
+    }
+
     public int wordToGuessLength(){
         if(wordToGuess == null){
             return 0;
@@ -51,19 +68,35 @@ public class Player {
     public String getGuessed(){
         return guessedChars.stream().map(c -> String.valueOf(c).toUpperCase()).collect(Collectors.joining(","));
     }
-    public FinishState getFinishState(){
+
+    public String getWordToGuess() {
+        if(isFinished){
+            return wordToGuess;
+        }
+        return "";
+    }
+
+    private void checkFinished(){
         if(mistakes > MAX_MISTAKES){
-            return FinishState.LOST;
+            logger.debug("Player "+getName()+" ("+getId()+") exceeded "+MAX_MISTAKES);
+            setFinished();
         }
-        if(false){
-            return FinishState.WON;
+        ArrayList<Character> wordChars = new ArrayList<>();
+        for(char c : wordToGuess.toCharArray()){
+            wordChars.add(c);
         }
-        return FinishState.NOTFINISHED;
+        if(guessedChars.containsAll(wordChars)){
+            logger.debug("Player "+getName()+" ("+getId()+") guessed right ("+getMistakes()+" mistakes)");
+            setFinished();
+        }
     }
 
     public String guessLetter(char letter) throws GuessingException {
         letter = Character.toLowerCase(letter);
         ArrayList<Integer> letterIndexes = new ArrayList<>();
+        if(isFinished){
+            return "";
+        }
         if(wordToGuess==null) {
             throw new GuessingException();
         }
@@ -79,13 +112,17 @@ public class Player {
                 mistakes++;
             }
         }
+        checkFinished();
         return letterIndexes.stream().map(String::valueOf).collect(Collectors.joining(","));
     }
-
-}
-enum FinishState{
-    NOTFINISHED,
-    WON,
-    LOST,
+    public String getScore(){
+        if(started==null||finished==null){
+            throw new ScoreException();
+        }
+        long timeTaken = (finished.getTime()-started.getTime())/1000;
+        String score = getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken;
+        logger.debug("PLAYER SCORE: "+score);
+        return score;
+    }
 
 }

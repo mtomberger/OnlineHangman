@@ -1,9 +1,6 @@
 package at.hangman.hangman;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -29,7 +26,7 @@ public class Room {
 
     public void setGuessWord() {
         if(maxPlayersReached()) {
-            Player nextP = players.get(players.size()-1);
+            Player nextP = players.get(getPlayerCount()-1);
             for(Player p : players){
                 p.setWordToGuess(nextP.getChoosenWord());
                 nextP = p;
@@ -38,7 +35,7 @@ public class Room {
     }
 
     public boolean maxPlayersReached(){
-        return players.size() >= PLAYERS_PER_ROOM;
+        return getPlayerCount() >= PLAYERS_PER_ROOM;
 
     }
     public boolean hasPlayer(String playerId){
@@ -51,6 +48,18 @@ public class Room {
             return null;
         }
         return searched.get();
+    }
+    public List<Player> getFinishedPlayers(){
+        return players.stream().filter(p-> p.isFinished()).sorted(Comparator.comparing(Player::getMistakes)).collect(Collectors.toList());
+    }
+    public List<Player> getPlayingPlayers(){
+        return players.stream().filter(p-> !p.isFinished()).sorted(Comparator.comparing(Player::getMistakes)).collect(Collectors.toList());
+    }
+    public String getScores(String delimiter){
+        return players.stream().map(Player::getScore).collect(Collectors.joining(delimiter));
+    }
+    public int getPlayerCount(){
+        return players.size();
     }
     public List<Player> getPlayers() {
         return players;

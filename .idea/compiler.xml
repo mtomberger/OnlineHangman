@@ -10,8 +10,5 @@
         <module name="HangmanGame" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="HangmanGame" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
