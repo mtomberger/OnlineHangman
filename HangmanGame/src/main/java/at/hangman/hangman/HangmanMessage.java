@@ -15,6 +15,7 @@ public class HangmanMessage {
     public enum MessageType {
         PLAY,
         FINISH,
+        SCORE,
         ID,
         JOIN,
         INIT,

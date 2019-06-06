@@ -102,6 +102,23 @@ public class HangmanController {
             for(Player p : playedRoom.getPlayers()){
                 returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.PLAY,message.toString(),p.getId(),p.getName()));
             }
+            List<Player> finished = playedRoom.getFinishedPlayers();
+            if(finished.size()>0){
+                logger.debug(finished.size()+" Player(s) finished in Room "+playedRoom.getId());
+                for(Player p : finished){
+                    returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.FINISH,
+                            p.getMistakes()+MESSAGE_DELIMITER+Player.MAX_MISTAKES+MESSAGE_DELIMITER+p.getWordToGuess(),
+                            p.getId(),
+                            p.getName()
+                    ));
+                }
+                if(finished.size()== playedRoom.getPlayerCount()){
+                    String scores = playedRoom.getScores(MESSAGE_DELIMITER);
+                    for(Player p : playedRoom.getPlayers()){
+                        returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.SCORE,scores,p.getId(),p.getName()));
+                    }
+                }
+            }
         } catch (GuessingException e) {
             logger.warn("GuessingException when guessing "+hangmanMessage.getContent().charAt(0) + " by "+currentPlayer.getName());
             message.append(currentPlayer.getGuessed());
