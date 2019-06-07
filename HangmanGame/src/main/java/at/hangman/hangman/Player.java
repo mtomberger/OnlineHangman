@@ -125,7 +125,7 @@ public class Player {
         }
         long timeTaken = (finished.getTime()-started.getTime())/1000;
         int scoreNumber = ScoreCalculator.getInstance().calculateScore(getWordToGuess(),getMistakes(),timeTaken);
-        scoreNumber = getMistakes()>Player.MAX_MISTAKES?0:Player.MAX_MISTAKES;
+        scoreNumber = getMistakes()>Player.MAX_MISTAKES?0:scoreNumber;
         String score = getId()+","+getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken+","+getWordToGuess()+","+scoreNumber;
         logger.debug("PLAYER SCORE: "+score);
         return score;

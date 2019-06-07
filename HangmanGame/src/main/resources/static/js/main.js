@@ -79,8 +79,7 @@ function onMessageReceived(message){
         var toGuess = message.content.split(MESSAGE_DELIMITER)[2];
         var state  = "' right. "+neededMistakes+" Letters were wrong.";
         $('.finish').removeClass("hidden");
-        debugger;
-        if(neededMistakes>availableMistakes){
+        if(parseInt(neededMistakes)>parseInt(availableMistakes)){
             state  = "' wrong";
             $('.finish-failed').removeClass("hidden");
 
@@ -97,53 +96,15 @@ function onMessageReceived(message){
             return {
                 id: s.split(",")[0],
                 player: s.split(",")[1],
-                mistakes: s.split(",")[2],
-                maxMistakes: s.split(",")[3],
+                mistakes: parseInt(s.split(",")[2]),
+                maxMistakes: parseInt(s.split(",")[3]),
                 time: s.split(",")[4],
                 word: s.split(",")[5],
                 score: s.split(",")[6],
             };
         });
         cont.empty();
-        scoreObjs.sort(function(a,b){
-            if(a.mistakes>b.mistakes){
-                return 1;
-            }
-            if(a.mistakes==b.mistakes){
-                if(a.time>b.time){
-                    return 1;
-                }
-                return -1;
-            }
-            return -1;
-        });
-        cont.append($("<h1>").text("Scores for this game"));
-        var table=$("<table class='score-table'>");
-        var headerRow = $("<tr>");
-        headerRow.append($("<th>").text("Player name"));
-        headerRow.append($("<th>").text("Mistakes made"));
-        headerRow.append($("<th>").text("Time needed"));
-        headerRow.append($("<th>").text("word to guess"));
-        headerRow.append($("<th>").text("Score"));
-        table.append(headerRow);
-        for(var i=0;i<scoreObjs.length;i++){
-            var scoreItem = $("<tr>");
-            var mis = scoreObjs[i].mistakes+"/"+scoreObjs[i].maxMistakes;
-            if(scoreObjs[i].mistakes>scoreObjs[i].maxMistakes){
-                mis = "too much";
-            }
-            if(scoreObjs[i].id == clientId){
-                scoreItem.append($("<td class='you'>").text(scoreObjs[i].player));
-            }else {
-                scoreItem.append($("<td>").text(scoreObjs[i].player));
-            }
-            scoreItem.append($("<td>").text(mis));
-            scoreItem.append($("<td>").text(scoreObjs[i].time+" Seconds"));
-            scoreItem.append($("<td>").text(scoreObjs[i].word));
-            scoreItem.append($("<td>").text(scoreObjs[i].score));
-            table.append(scoreItem);
-        }
-        cont.append(table);
+        createScoreboard(cont,scoreObjs);
         cont.append($('<button class="scores-button">').text("Submit your Score"));
         cont.removeClass("hidden");
         $('.finish').addClass("hidden");
@@ -177,6 +138,50 @@ function onMessageReceived(message){
         });
 
     }
+}
+function createScoreboard(board,scoreObjs){
+    scoreObjs.sort(function(a,b){
+        if(a.score<b.score){
+            return 1;
+        }
+        if(a.score==b.score){
+            if(a.time>b.time){
+                return 1;
+            }
+            return -1;
+        }
+        return -1;
+    });
+    board.append($("<h1>").text("Scores for this game"));
+    var table=$("<table class='score-table'>");
+    var headerRow = $("<tr>");
+    headerRow.append($("<th>").text("Place"));
+    headerRow.append($("<th>").text("Player name"));
+    headerRow.append($("<th>").text("Mistakes made"));
+    headerRow.append($("<th>").text("Time needed"));
+    headerRow.append($("<th>").text("word to guess"));
+    headerRow.append($("<th>").text("Score"));
+    table.append(headerRow);
+    for(var i=0;i<scoreObjs.length;i++){
+        var scoreItem = $("<tr>");
+        scoreItem.append($("<td>").text((i+1)+"."));
+        var mis = scoreObjs[i].mistakes+"/"+scoreObjs[i].maxMistakes;
+        if(scoreObjs[i].mistakes>scoreObjs[i].maxMistakes){
+            mis = "too much";
+            scoreItem.addClass("crossed");
+        }
+        if(scoreObjs[i].id == clientId){
+            scoreItem.append($("<td class='you'>").text(scoreObjs[i].player));
+        }else {
+            scoreItem.append($("<td>").text(scoreObjs[i].player));
+        }
+        scoreItem.append($("<td>").text(mis));
+        scoreItem.append($("<td>").text(scoreObjs[i].time+" Seconds"));
+        scoreItem.append($("<td>").text(scoreObjs[i].word));
+        scoreItem.append($("<td>").text(scoreObjs[i].score));
+        table.append(scoreItem);
+    }
+    board.append(table);
 }
 function onMessagesReceived(payload) {
     var receivedMessages = JSON.parse(payload.body);
@@ -329,7 +334,7 @@ $("#word").on('keydown',function(e){
 });
 $('body').on('click','.scores-button',function(){
     //TODO load score page
-    console.log("scores");
     roominfo.text("Top scores");
+    createScoreboard(scorePage,[]);
     showPage(scorePage);
 });
