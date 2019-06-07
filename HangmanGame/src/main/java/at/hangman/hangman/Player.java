@@ -28,7 +28,6 @@ public class Player {
         this.name = name;
         this.choosenWord = choosenWord;
         id = UUID.randomUUID().toString().replace("-", "");
-        started = new Date();
     }
 
     public String getId() {
@@ -92,6 +91,9 @@ public class Player {
     }
 
     public String guessLetter(char letter) throws GuessingException {
+        if(guessedChars.size()==0){
+            started = new Date();
+        }
         letter = Character.toLowerCase(letter);
         ArrayList<Integer> letterIndexes = new ArrayList<>();
         if(isFinished){
@@ -111,6 +113,8 @@ public class Player {
             if(letterIndexes.size()<=0){
                 mistakes++;
             }
+        }else{
+            letterIndexes.add(-1);
         }
         checkFinished();
         return letterIndexes.stream().map(String::valueOf).collect(Collectors.joining(","));
@@ -120,9 +124,10 @@ public class Player {
             throw new ScoreException();
         }
         long timeTaken = (finished.getTime()-started.getTime())/1000;
-        String score = getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken;
+        int scoreNumber = ScoreCalculator.getInstance().calculateScore(getWordToGuess(),getMistakes(),timeTaken);
+        scoreNumber = getMistakes()>Player.MAX_MISTAKES?0:Player.MAX_MISTAKES;
+        String score = getId()+","+getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken+","+getWordToGuess()+","+scoreNumber;
         logger.debug("PLAYER SCORE: "+score);
         return score;
     }
-
 }

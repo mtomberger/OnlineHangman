@@ -7,6 +7,7 @@ var loadingOverlay = $('.loading');
 var roominfo = $('#roominfo');
 var enemyinfo = $('#enemy-info');
 var playerinfo = $('#player-info');
+var cont = $('.score-container');
 var isConnected = false;
 var stompClient = null;
 var username = null;
@@ -90,7 +91,65 @@ function onMessageReceived(message){
         roominfo.text("You guessed the word '" + toGuess+"' from '"+enemyinfo.text()+state);
     }
     if(message.type === 'SCORE'){
-        $('.score-container').html(message.content);
+        //Player,0,10,90#;#Player2,11,10,61
+        var scores = message.content.split(MESSAGE_DELIMITER);
+        var scoreObjs = scores.map(function(s){
+            return {
+                id: s.split(",")[0],
+                player: s.split(",")[1],
+                mistakes: s.split(",")[2],
+                maxMistakes: s.split(",")[3],
+                time: s.split(",")[4],
+                word: s.split(",")[5],
+                score: s.split(",")[6],
+            };
+        });
+        cont.empty();
+        scoreObjs.sort(function(a,b){
+            if(a.mistakes>b.mistakes){
+                return 1;
+            }
+            if(a.mistakes==b.mistakes){
+                if(a.time>b.time){
+                    return 1;
+                }
+                return -1;
+            }
+            return -1;
+        });
+        cont.append($("<h1>").text("Scores for this game"));
+        var table=$("<table class='score-table'>");
+        var headerRow = $("<tr>");
+        headerRow.append($("<th>").text("Player name"));
+        headerRow.append($("<th>").text("Mistakes made"));
+        headerRow.append($("<th>").text("Time needed"));
+        headerRow.append($("<th>").text("word to guess"));
+        headerRow.append($("<th>").text("Score"));
+        table.append(headerRow);
+        for(var i=0;i<scoreObjs.length;i++){
+            var scoreItem = $("<tr>");
+            var mis = scoreObjs[i].mistakes+"/"+scoreObjs[i].maxMistakes;
+            if(scoreObjs[i].mistakes>scoreObjs[i].maxMistakes){
+                mis = "too much";
+            }
+            if(scoreObjs[i].id == clientId){
+                scoreItem.append($("<td class='you'>").text(scoreObjs[i].player));
+            }else {
+                scoreItem.append($("<td>").text(scoreObjs[i].player));
+            }
+            scoreItem.append($("<td>").text(mis));
+            scoreItem.append($("<td>").text(scoreObjs[i].time+" Seconds"));
+            scoreItem.append($("<td>").text(scoreObjs[i].word));
+            scoreItem.append($("<td>").text(scoreObjs[i].score));
+            table.append(scoreItem);
+        }
+        cont.append(table);
+        cont.append($('<button class="scores-button">').text("Submit your Score"));
+        cont.removeClass("hidden");
+        $('.finish').addClass("hidden");
+        $('.finish-success').addClass("hidden");
+        $('.finish-failed').addClass("hidden");
+
     }
     if(message.type === 'PLAY'){
         var messagecontents = message.content.split(MESSAGE_DELIMITER);
@@ -163,9 +222,9 @@ function drawMistake(hangman){
     setTimeout(function(p,rc){
         p.addClass(rc).addClass("draw-part");
     },0,part,removedClass);
-    $('.chalkboard').addClass('wrong');
+    $(hangman).parents('.player-container,.enemy-container').addClass('wrong');
     setTimeout(function(){
-        $('.chalkboard').removeClass('wrong');
+        $(hangman).parents('.player-container,.enemy-container').removeClass('wrong');
     },500);
 }
 function onSocketError(error) {
@@ -189,6 +248,7 @@ function resetPages(){
     roominfo.text("");
     enemyinfo.text("");
     playerinfo.text("");
+    cont.removeClass("hidden");
     resetTyping();
 }
 function showPage(page){
@@ -196,6 +256,7 @@ function showPage(page){
     joinPage.addClass("hidden");
     gamePage.addClass("hidden");
     page.removeClass("hidden");
+    cont.addClass("hidden");
 }
 
 var chooseMode = false;
@@ -214,7 +275,7 @@ function initTyping(){
         if(!typingAvailable){
             return;
         }
-        if((e.keyCode>=65 && e.keyCode<=90) || (e.keyCode>=97 && e.keyCode<=122)){
+        if(e.keyCode>=65 && e.keyCode<=90){
             pressedKey = e.key.toUpperCase();
         }
         if(e.keyCode==13 && chooseMode){
@@ -265,4 +326,10 @@ function generateGuid(){
 joinPage.on('submit', connect);
 $("#word").on('keydown',function(e){
     return (/[A-Za-z]/.test(e.key.substr(0,1)));
+});
+$('body').on('click','.scores-button',function(){
+    //TODO load score page
+    console.log("scores");
+    roominfo.text("Top scores");
+    showPage(scorePage);
 });
