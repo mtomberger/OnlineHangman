@@ -14,14 +14,22 @@
 * Die 15 besten Scores können angezeigt werden
 * Es gibt ein API zur Abfrage aller Scores
 
-
 ## Ablauf
 
+## Nachrichtenfluss
+
 ## Technologien
+* Spring Boot - Java Applikationen
+* SockJs - Websockets
+* Hibernate - Java OR-Mapper
+* PostgreSQL - einfache Scoredatenbank
+* HTML/JS/CSS - Benutzeroberfläche
+* GIT - Sourcecodeverwaltung
 
 ## Architektur
+![Architektur-Bild][architecture]
 
-## Nachrichtenfluss
+[architecture]: https://github.com/mtomberger/OnlineHangman/blob/master/architecture.png "Architektur"
 
 
 
