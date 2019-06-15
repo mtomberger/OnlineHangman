@@ -72,6 +72,14 @@ __Starten__
 3. Ports: Applikation: 8080, API: 8081  
 
 ## Anleitung
+__Als Spieler__  
+Wann habe ich gewonnen/verloren?  
+Wie rate ich einen Buchstaben?  
+Wie sehe ich meine Score?  
+Wie starte ich ein Spiel?  
+Wie sehe ich Scores von Anderen?  
+
+__Als Benutzer der API__  
 
 ## Architektur
 ![Architektur-Bild][architecture]
@@ -87,9 +95,9 @@ __Starten__
 ### Sourcecode
 https://github.com/mtomberger/OnlineHangman/
 ### Links
-Spring Boot Framework: https://spring.io/projects/spring-boot
-Spring Boot/ STOMP Tutorial: https://www.baeldung.com/websockets-api-java-spring-client
-STOMP js: https://github.com/stomp-js/stompjs
+Spring Boot Framework: https://spring.io/projects/spring-boot  
+Spring Boot/ STOMP Tutorial: https://www.baeldung.com/websockets-api-java-spring-client  
+STOMP js: https://github.com/stomp-js/stompjs  
 
 
 [architecture]: https://github.com/mtomberger/OnlineHangman/blob/master/architecture.png "Architektur"
