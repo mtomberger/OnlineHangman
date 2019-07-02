@@ -1,7 +1,6 @@
 package hangmandb.hangmandb.api;
 
-import entities.Game;
-import entities.Player;
+import entities.Score;
 import hangmandb.hangmandb.services.DBService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +16,13 @@ public class HangmanController {
         return "Welcome, here is the hangman controller!";
     }
 
-    @PostMapping("/player")
-    public Player addPlayer(@RequestBody Player player) {
-        return dbService.addPlayer(player);
+    @PostMapping("/score")
+    public Score addGame(@RequestBody Score score) {
+        return dbService.addGame(score);
     }
 
-    @PostMapping("/game")
-    public Game addGame(@RequestBody Game game) {
-        return dbService.addGame(game);
-    }
-
-    @GetMapping("/game")
-    public List<Game> getScoreBoard(int size) {
+    @GetMapping("/score")
+    public List<Score> getScoreBoard(int size) {
         return dbService.getScoreBoard(size);
     }
 }

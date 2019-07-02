@@ -334,6 +334,19 @@ $("#word").on('keydown',function(e){
 });
 $('body').on('click','.scores-button',function(){
     //TODO load score page
+
+    var board = $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/scores",
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function() {
+            alert("success");
+        }
+    });
+
     roominfo.text("Top scores");
     createScoreboard(scorePage,[]);
     showPage(scorePage);

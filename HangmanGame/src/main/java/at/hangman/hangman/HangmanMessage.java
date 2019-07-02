@@ -20,7 +20,8 @@ public class HangmanMessage {
         JOIN,
         INIT,
         ERROR,
-        LEAVE
+        LEAVE,
+        SCOREINFO
     }
 
     public HangmanMessage() {
