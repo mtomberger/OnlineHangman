@@ -75,7 +75,7 @@ __Starten__
 3. Ports: Applikation: 8080, API: 8081  
 
 ## Anleitung
-__Als Spieler__  
+### Als Spieler
 Zu Beginn muss man ein Wort, das der Gegenspieler erraten muss eingeben. Es muss ein englisches Nomen mit mindestens 3 Buchstaben sein.
 Außerdem muss man den Namen eingeben, unter welchem man spielen möchte. Nach dem Klick auf den Start-Button muss gewartet werden, bis ein zweiter Spieler das Spiel betritt.
 
@@ -83,27 +83,27 @@ Nun bekommt man das Wort, das erraten werden muss in Form von Strichen angezeigt
 
 Für das Raten muss man nicht auf den Gegenspieler werten. Das Spiel ist zu Ende wen beide Spieler das Wort erraten haben oder alle Versuche aufgebraucht haben. Dann wird der Score der Spieler angezeigt. Man sieht ob man besser wwar wie der Gegenspieler und bekommt die Chance seinen Score zu speichern.    
 
-Wann habe ich gewonnen/verloren?        
+__Wann habe ich gewonnen/verloren?__        
 
 Gewonnen hat man, wenn man im Score-Bildschirm über dem Gegenüber an erster Stelle steht. Der eiigene Spieler ist mit einem Spieler-Symbol markiert. Verloren hat man wenn man zweiter im Score-Bildschirm wird oder alle Versuch aufgebraucht hat.
 
-Wie rate ich einen Buchstaben?  
+__Wie rate ich einen Buchstaben?__  
 
 Wenn man in einem Spiel einen Gegenspieler gefunden hat (der Name erscheint rechts) muss einfach der Buchstabe auf der Tastatur eingegeben und mit Enter bestätigt werden.
 
-Wie sehe ich meine Score?  
+__Wie sehe ich meine Score?__  
 
 Am Ende eines Spiels wird der Score für dieses Spiel angezeigt. Dort sieht man wer gewonnen hat und bekommt die Chance seinen Score zu speichern.
 
-Wie starte ich ein Spiel?  
+__Wie starte ich ein Spiel?__  
 
 Auf der Startseite muss ein Name und ein englisches Namenword in die Felder eingegeben werden. Mit dem "Start Game"-Button geht es los. Es kann aber sein dass man auf einen Gegenspieler warten muss.
 
-Wie sehe ich Scores von Anderen?  
+__Wie sehe ich Scores von Anderen?__  
 
 Die besten Scores können über den "Scores"-Button auf der Startseite angesehen werden.
 
-__Als Benutzer der API__  
+### Als Benutzer der API
 
 Um die Hangman-Scores API zu benutzen, müssen HTTP-GET-Requests auf die URL der API abgesetzt werden.
 
@@ -117,6 +117,10 @@ Um die Hangman-Scores API zu benutzen, müssen HTTP-GET-Requests auf die URL der
 * HTML/JS/CSS - Benutzeroberfläche
 * GIT - Sourcecodeverwaltung
 ## Zusammenfassung
+### Ergebnis
+### Bekannte Probleme
+### Weitere Möglichkeiten
+### Persönliche Menung / Erkenntnisse
 ## Anhang
 ### Sourcecode
 https://github.com/mtomberger/OnlineHangman/
