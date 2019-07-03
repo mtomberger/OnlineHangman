@@ -169,6 +169,7 @@ public class HangmanController {
             e.printStackTrace();
         }
 
+        // TODO: FUNKTIONIERT NICHT!!! CLIENT ERROR!!!
         return json;
     }
 
