@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36f8c5e2-4d3a-4a82-bef7-66c33c861ade" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hangman.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hangman.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/api/HangmanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/api/HangmanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HangmanGame/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/Score.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hangman.log" beforeDir="false" afterPath="$PROJECT_DIR$/hangman.log" afterDir="false" />
     </list>
@@ -34,22 +26,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="161" selection-start-line="161" selection-end-line="161" />
+            <state relative-caret-position="34">
+              <caret line="177" column="24" selection-start-line="177" selection-start-column="18" selection-end-line="177" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,16 +38,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/api/HangmanController.java">
+        <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="3450">
+              <caret line="348" column="39" selection-start-line="348" selection-start-column="39" selection-end-line="348" selection-end-column="39" />
               <folding>
-                <element signature="e#332#333#0" expanded="true" />
-                <element signature="e#397#398#0" expanded="true" />
-                <element signature="e#478#479#0" expanded="true" />
-                <element signature="e#525#526#0" expanded="true" />
-                <element signature="e#653#654#0" expanded="true" />
+                <element signature="e#22#28#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,79 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/Score.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-              <folding>
-                <element signature="e#647#648#0" expanded="true" />
-                <element signature="e#672#673#0" expanded="true" />
-                <element signature="e#706#707#0" expanded="true" />
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#769#770#0" expanded="true" />
-                <element signature="e#800#801#0" expanded="true" />
-                <element signature="e#848#849#0" expanded="true" />
-                <element signature="e#888#889#0" expanded="true" />
-                <element signature="e#920#921#0" expanded="true" />
-                <element signature="e#951#952#0" expanded="true" />
-                <element signature="e#996#997#0" expanded="true" />
-                <element signature="e#1036#1037#0" expanded="true" />
-                <element signature="e#1070#1071#0" expanded="true" />
-                <element signature="e#1103#1104#0" expanded="true" />
-                <element signature="e#1152#1153#0" expanded="true" />
-                <element signature="e#1196#1197#0" expanded="true" />
-                <element signature="e#1355#1356#0" expanded="true" />
-                <element signature="e#1383#1384#0" expanded="true" />
-                <element signature="e#1422#1423#0" expanded="true" />
-                <element signature="e#1456#1457#0" expanded="true" />
-                <element signature="e#1499#1500#0" expanded="true" />
-                <element signature="e#1531#1532#0" expanded="true" />
-                <element signature="e#1588#1589#0" expanded="true" />
-                <element signature="e#1630#1631#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#350#351#0" expanded="true" />
-                <element signature="e#375#376#0" expanded="true" />
-                <element signature="e#409#410#0" expanded="true" />
-                <element signature="e#437#438#0" expanded="true" />
-                <element signature="e#472#473#0" expanded="true" />
-                <element signature="e#503#504#0" expanded="true" />
-                <element signature="e#551#552#0" expanded="true" />
-                <element signature="e#591#592#0" expanded="true" />
-                <element signature="e#623#624#0" expanded="true" />
-                <element signature="e#654#655#0" expanded="true" />
-                <element signature="e#699#700#0" expanded="true" />
-                <element signature="e#739#740#0" expanded="true" />
-                <element signature="e#773#774#0" expanded="true" />
-                <element signature="e#806#807#0" expanded="true" />
-                <element signature="e#855#856#0" expanded="true" />
-                <element signature="e#899#900#0" expanded="true" />
-                <element signature="e#928#929#0" expanded="true" />
-                <element signature="e#956#957#0" expanded="true" />
-                <element signature="e#995#996#0" expanded="true" />
-                <element signature="e#1029#1030#0" expanded="true" />
-                <element signature="e#1072#1073#0" expanded="true" />
-                <element signature="e#1104#1105#0" expanded="true" />
-                <element signature="e#1161#1162#0" expanded="true" />
-                <element signature="e#1203#1204#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="322">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -175,6 +80,7 @@
       <find>stompClient</find>
       <find>Logger.err</find>
       <find>Error</find>
+      <find>timestamp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,7 +98,6 @@
         <option value="$PROJECT_DIR$/HangmanClient/src/main/java/at/hangman/hangman/Room.java" />
         <option value="$PROJECT_DIR$/HangmanDB/pom.xml" />
         <option value="$PROJECT_DIR$/HangmanClient/pom.xml" />
-        <option value="$PROJECT_DIR$/HangmanGame/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/.idea/compiler.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -204,13 +109,14 @@
         <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/ScoreWrapper.java" />
         <option value="$PROJECT_DIR$/HangmanDB/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/WebSocketConfig.java" />
-        <option value="$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql" />
-        <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java" />
-        <option value="$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js" />
         <option value="$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java" />
         <option value="$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java" />
+        <option value="$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql" />
         <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/Score.java" />
         <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java" />
+        <option value="$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js" />
+        <option value="$PROJECT_DIR$/HangmanGame/pom.xml" />
+        <option value="$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java" />
       </list>
     </option>
   </component>
@@ -300,6 +206,23 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="hangmandb" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hangman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="HangmanDB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hangman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="HangmanDB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="sql" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Hangman" type="b2602c69:ProjectViewProjectNode" />
@@ -397,8 +320,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -408,7 +331,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562092645506" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562173877186" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -484,7 +407,8 @@
       <workItem from="1560589080637" duration="39000" />
       <workItem from="1560592046582" duration="7462000" />
       <workItem from="1560604847450" duration="436000" />
-      <workItem from="1562090745770" duration="1856000" />
+      <workItem from="1562090745770" duration="2135000" />
+      <workItem from="1562169190055" duration="4581000" />
     </task>
     <task id="LOCAL-00001" summary="module functinoality and db api">
       <created>1559755698227</created>
@@ -535,17 +459,24 @@
       <option name="project" value="LOCAL" />
       <updated>1559838392393</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge branch 'master' of https://github.com/mtomberger/OnlineHangman into add-db-api&#10;&#10;# Conflicts:&#10;#&#9;.gitignore; get data from db">
+      <created>1562092682476</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1562092682476</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17164000" />
+    <option name="totallyTimeSpent" value="22024000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2803838" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2835821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -557,7 +488,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49733475" weight="0.33044422" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" visible="true" weight="0.3997833" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" visible="true" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -592,84 +523,17 @@
     <MESSAGE value="clean packages bug fix" />
     <MESSAGE value="solve merge conflicts" />
     <MESSAGE value="Merge branch 'master' of https://github.com/mtomberger/OnlineHangman into add-db-api&#10;&#10;# Conflicts:&#10;#&#9;.gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/mtomberger/OnlineHangman into add-db-api&#10;&#10;# Conflicts:&#10;#&#9;.gitignore" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/mtomberger/OnlineHangman into add-db-api&#10;&#10;# Conflicts:&#10;#&#9;.gitignore; get data from db" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/mtomberger/OnlineHangman into add-db-api&#10;&#10;# Conflicts:&#10;#&#9;.gitignore; get data from db" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java</url>
-          <line>161</line>
+          <line>173</line>
           <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java</url>
-          <line>162</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/api/HangmanController.java</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java</url>
-          <line>29</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>31</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>39</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>52</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>43</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java</url>
-          <line>35</line>
-          <properties class="at.hangman.hangman.HangmanDBService" method="convertArrayToList">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -682,22 +546,8 @@
     <entry file="file://$PROJECT_DIR$/HangmanClient/src/main/java/at/hangman/hangman/ChatMessage.java" />
     <entry file="file://$PROJECT_DIR$/HangmanClient/src/main/java/at/hangman/hangman/ChatController.java" />
     <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/entities/Player.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanGame/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -717,13 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/resources/static/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="90" column="40" lean-forward="true" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -754,21 +597,11 @@
     <entry file="file://$PROJECT_DIR$/architecture.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/hangman.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/RestTemplateConfig.java" />
     <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/api/ScoreWrapper.java" />
-    <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -813,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/HangmandbApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -831,16 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="345" column="29" lean-forward="true" selection-start-line="345" selection-start-column="29" selection-end-line="345" selection-end-column="29" />
-          <folding>
-            <element signature="e#22#28#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -858,80 +674,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hangman.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/resources/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/entities/Score.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+        <state relative-caret-position="347">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-            <element signature="e#409#410#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#472#473#0" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-            <element signature="e#551#552#0" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#654#655#0" expanded="true" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#739#740#0" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-            <element signature="e#899#900#0" expanded="true" />
-            <element signature="e#928#929#0" expanded="true" />
-            <element signature="e#956#957#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-            <element signature="e#1029#1030#0" expanded="true" />
-            <element signature="e#1072#1073#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1161#1162#0" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/Score.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        <state relative-caret-position="285">
+          <caret line="69" column="38" lean-forward="true" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
           <folding>
-            <element signature="e#647#648#0" expanded="true" />
-            <element signature="e#672#673#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
-            <element signature="e#734#735#0" expanded="true" />
-            <element signature="e#769#770#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#848#849#0" expanded="true" />
-            <element signature="e#888#889#0" expanded="true" />
-            <element signature="e#920#921#0" expanded="true" />
-            <element signature="e#951#952#0" expanded="true" />
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1036#1037#0" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1103#1104#0" expanded="true" />
-            <element signature="e#1152#1153#0" expanded="true" />
-            <element signature="e#1196#1197#0" expanded="true" />
-            <element signature="e#1355#1356#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#1422#1423#0" expanded="true" />
-            <element signature="e#1456#1457#0" expanded="true" />
-            <element signature="e#1499#1500#0" expanded="true" />
-            <element signature="e#1531#1532#0" expanded="true" />
-            <element signature="e#1588#1589#0" expanded="true" />
-            <element signature="e#1630#1631#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java">
+    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="161" selection-start-line="161" selection-end-line="161" />
+        <state relative-caret-position="350">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/resources/sql/hangman.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -951,15 +755,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HangmanDB/src/main/java/hangmandb/hangmandb/services/DBService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="322">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanDBService.java">
+    <entry file="file://$PROJECT_DIR$/HangmanGame/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+        <state relative-caret-position="170">
+          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/resources/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3450">
+          <caret line="348" column="39" selection-start-line="348" selection-start-column="39" selection-end-line="348" selection-end-column="39" />
+          <folding>
+            <element signature="e#22#28#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HangmanGame/src/main/java/at/hangman/hangman/HangmanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="177" column="24" selection-start-line="177" selection-start-column="18" selection-end-line="177" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -337,13 +337,16 @@ $('body').on('click','.scores-button',function(){
 
     var board = $.ajax({
         type: "GET",
-        contentType: "application/json",
         url: "/scores",
-        dataType: 'json',
+        contentType: "application/json",
         cache: false,
         timeout: 600000,
-        success: function() {
-            alert("success");
+        dataType: "json",
+        success: function(result) {
+            alert(result);
+        },
+        error: function (response) {
+            alert(response.responseText)
         }
     });
 

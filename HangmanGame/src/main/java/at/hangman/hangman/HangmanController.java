@@ -4,7 +4,9 @@ import at.hangman.exception.GuessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.var;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -158,9 +160,38 @@ public class HangmanController {
     }
 
     @GetMapping("/scores")
-    public List<Score> getScoreBoard() {
-        List<Score> score = hangmanDBService.getScores(SCOREBOARD_SIZE);
-        return score;
+    public JSONObject getScoreBoard() {
+        List<Score> scores = hangmanDBService.getScores(SCOREBOARD_SIZE);
+        JSONObject json = null;
+        try {
+            json = toJsonArray(new ArrayList<>(scores));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
+    }
+
+    private JSONObject toJsonArray(ArrayList<Score> scores) throws JSONException {
+        JSONArray jArray = new JSONArray();
+        JSONObject jObject = new JSONObject();
+        int i = 0;
+        for (Score score : scores)
+        {
+            i++;
+            JSONObject studentJSON = new JSONObject();
+            studentJSON.put("place", i);
+            studentJSON.put("playerName", score.getUsername());
+            studentJSON.put("mistakes", score.getMistakes());
+            studentJSON.put("timeNeeded", score.getTimeNeeded());
+            studentJSON.put("word", score.getWord());
+            studentJSON.put("score", score.getScore());
+            jArray.put(studentJSON);
+        }
+
+        jObject.put("scores", jArray);
+
+        return jObject;
     }
 
     private boolean checkForAllowedWord(String wordsJson,String word){
