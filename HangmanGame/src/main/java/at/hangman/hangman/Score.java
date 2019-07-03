@@ -1,19 +1,22 @@
 package at.hangman.hangman;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Score {
 
     private long id;
     private String username;
+    private String word;
     private int mistakes;
     private int timeNeeded;
     private int score;
-    private LocalDateTime timestamp;
+    private LocalDate timestamp;
 
-    public Score(long id, String username, int mistakes, int timeNeeded, int score, LocalDateTime timestamp) {
+    public Score(long id, String username, String word, int mistakes, int timeNeeded, int score, LocalDate timestamp) {
         this.id = id;
         this.username = username;
+        this.word = word;
         this.mistakes = mistakes;
         this.timeNeeded = timeNeeded;
         this.score = score;
@@ -60,11 +63,15 @@ public class Score {
         this.score = score;
     }
 
-    public LocalDateTime getTimestamp() {
+    public LocalDate getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(LocalDate timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getWord() { return word; }
+
+    public void setWord(String word) { this.word = word; }
 }

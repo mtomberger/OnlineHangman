@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,12 +43,18 @@ public class HangmanDBService {
             LinkedHashMap e = (LinkedHashMap) o;
             int id = (int) e.get("id");
             String username = (String) e.get("username");
+            String word = (String) e.get("word");
             int mistakes = (int) e.get("mistakes");
             int timeNeeded = (int) e.get("timeNeeded");
             int score  = (int) e.get("timeNeeded");
-            int timestamp  = (int) e.get("timeNeeded");
 
-            Score newScore = new Score(id, username, mistakes, timeNeeded, score, LocalDateTime.now());
+            // TODO: rework date exchange!
+            String dateTimeStr = (String) e.get("timestamp");
+            String dateStr = dateTimeStr.substring(0, 10);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(dateStr, formatter);
+
+            Score newScore = new Score(id, username, word, mistakes, timeNeeded, score, date);
             scores.add(newScore);
         }
 

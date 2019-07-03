@@ -12,6 +12,8 @@ public class Score {
 
     private String username;
 
+    private String word;
+
     private int mistakes;
 
     private int timeNeeded;
@@ -24,9 +26,10 @@ public class Score {
 
     }
 
-    public Score(long id, String username, int mistakes, int timeNeeded, int score, LocalDateTime timestamp) {
+    public Score(long id, String username, String word, int mistakes, int timeNeeded, int score, LocalDateTime timestamp) {
         this.id = id;
         this.username = username;
+        this.word = word;
         this.mistakes = mistakes;
         this.timeNeeded = timeNeeded;
         this.score = score;
@@ -80,4 +83,8 @@ public class Score {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getWord() { return word; }
+
+    public void setWord(String word) { this.word = word; }
 }
