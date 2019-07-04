@@ -3,7 +3,6 @@
     <persistence-unit name="unithangman">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>entities.Score</class>
-        <class>entities.Player</class>
         <properties>
             <property name="javax.persistence.jdbc.default_schema" value="sequence"></property>
             <property name="javax.persistence.jdbc.driver"
