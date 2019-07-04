@@ -1,5 +1,6 @@
 package hangmandb.hangmandb.api;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import entities.Score;
 import hangmandb.hangmandb.services.DBService;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class HangmanController {
     }
 
     @PostMapping("/score")
-    public Score addGame(@RequestBody Score score) {
-        return dbService.addGame(score);
+    public Score addGame(@RequestBody Object jsonpObject) {
+        return dbService.addGame(new Score());
     }
 
     @GetMapping("/score")
