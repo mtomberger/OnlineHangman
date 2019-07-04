@@ -1,7 +1,6 @@
 package at.hangman.hangman;
 
 import org.springframework.web.bind.annotation.*;
-import sun.util.xml.PlatformXmlPropertiesProvider;
 
 import java.util.List;
 import java.util.Map;
