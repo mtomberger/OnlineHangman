@@ -108,8 +108,8 @@ function onMessageReceived(message){
         cont.empty();
         cont.append($("<h1>").text("Scores for this game"));
         createScoreboard(cont,scoreObjs);
-
         cont.append($('<button class="scores-button submit-scores">').text("Submit your Score"));
+        cont.append('<a href="/" class="back-button scores-button">Back</a>');
         cont.removeClass("hidden");
         $('.finish').addClass("hidden");
         $('.finish-success').addClass("hidden");
@@ -351,6 +351,7 @@ $('body').on('click','.show-scores',function(){
                 result[i].time = result[i].timeNeeded;
             }
             createScoreboard(scorePage,result);
+            scorePage.append('<a href="/" class="back-button scores-button">Back</a>');
             showPage(scorePage);
         },
         error: function (response) {
@@ -374,6 +375,7 @@ $('body').on('click','.submit-scores',function(){
                 result[i].time = result[i].timeNeeded;
             }
             createScoreboard(scorePage,result);
+            scorePage.append('<a href="/" class="back-button scores-button">Back</a>');
             showPage(scorePage);
         },
         error: function (response) {
