@@ -5,6 +5,7 @@ import at.hangman.exception.ScoreException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -129,5 +130,17 @@ public class Player {
         String score = getId()+","+getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken+","+getWordToGuess()+","+scoreNumber;
         logger.debug("PLAYER SCORE: "+score);
         return score;
+    }
+
+    public Score getScoreObject(){
+        if(started==null||finished==null){
+            throw new ScoreException();
+        }
+        long timeTaken = (finished.getTime()-started.getTime())/1000;
+        int scoreNumber = ScoreCalculator.getInstance().calculateScore(getWordToGuess(),getMistakes(),timeTaken);
+        scoreNumber = getMistakes()>Player.MAX_MISTAKES?0:scoreNumber;
+        String score = getId()+","+getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken+","+getWordToGuess()+","+scoreNumber;
+        logger.debug("PLAYER SCORE: "+score);
+        return new Score(getName(), getChoosenWord(), getMistakes(), (int) timeTaken, scoreNumber, LocalDate.now());
     }
 }

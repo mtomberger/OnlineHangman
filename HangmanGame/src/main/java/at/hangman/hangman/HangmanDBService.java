@@ -1,15 +1,20 @@
 package at.hangman.hangman;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public class HangmanDBService {
 
@@ -19,8 +24,20 @@ public class HangmanDBService {
     private RestTemplate restTemplate;
 
     public void addScore(Score score) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(URI, score, Score.class);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("names", score);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpEntity<JSONObject> entity = new HttpEntity<>(jsonObject , headers);
+
+        restTemplate.postForObject(URI, "teststring", String.class);
     }
 
     public List<Score> getScores(int scores) {
@@ -48,7 +65,6 @@ public class HangmanDBService {
             int timeNeeded = (int) e.get("timeNeeded");
             int score  = (int) e.get("timeNeeded");
 
-            // TODO: rework date exchange!
             String dateTimeStr = (String) e.get("timestamp");
             String dateStr = dateTimeStr.substring(0, 10);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

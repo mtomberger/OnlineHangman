@@ -23,6 +23,15 @@ public class Score {
         this.timestamp = timestamp;
     }
 
+    public Score(String username, String word, int mistakes, int timeNeeded, int score, LocalDate timestamp) {
+        this.username = username;
+        this.word = word;
+        this.mistakes = mistakes;
+        this.timeNeeded = timeNeeded;
+        this.score = score;
+        this.timestamp = timestamp;
+    }
+
     public long getId() {
         return id;
     }

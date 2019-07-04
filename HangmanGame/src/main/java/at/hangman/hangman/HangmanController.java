@@ -26,11 +26,10 @@ import java.util.*;
 @Controller
 public class HangmanController {
 
-    private List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = RoomWrapper.getRooms();
     private final String MESSAGE_DELIMITER="#;#";
     private static final Logger logger = LoggerFactory.getLogger(HangmanController.class);
-    private HangmanDBService hangmanDBService = new HangmanDBService();
-    public static final int SCOREBOARD_SIZE = 10;
+
 
     @MessageMapping("/hangman.addUser")
     @SendTo("/hangman/public")
@@ -157,42 +156,6 @@ public class HangmanController {
 
         Room room = rooms.stream().filter(r -> null != r.getPlayer(hangmanMessage.getSenderId())).findFirst().get();
         return null;
-    }
-
-    @GetMapping("/scores")
-    public JSONObject getScoreBoard() {
-        List<Score> scores = hangmanDBService.getScores(SCOREBOARD_SIZE);
-        JSONObject json = null;
-        try {
-            json = toJsonArray(new ArrayList<>(scores));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // TODO: FUNKTIONIERT NICHT!!! CLIENT ERROR!!!
-        return json;
-    }
-
-    private JSONObject toJsonArray(ArrayList<Score> scores) throws JSONException {
-        JSONArray jArray = new JSONArray();
-        JSONObject jObject = new JSONObject();
-        int i = 0;
-        for (Score score : scores)
-        {
-            i++;
-            JSONObject studentJSON = new JSONObject();
-            studentJSON.put("place", i);
-            studentJSON.put("playerName", score.getUsername());
-            studentJSON.put("mistakes", score.getMistakes());
-            studentJSON.put("timeNeeded", score.getTimeNeeded());
-            studentJSON.put("word", score.getWord());
-            studentJSON.put("score", score.getScore());
-            jArray.put(studentJSON);
-        }
-
-        jObject.put("scores", jArray);
-
-        return jObject;
     }
 
     private boolean checkForAllowedWord(String wordsJson,String word){
