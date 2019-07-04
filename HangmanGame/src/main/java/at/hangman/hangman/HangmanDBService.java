@@ -3,7 +3,6 @@ package at.hangman.hangman;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +34,9 @@ public class HangmanDBService {
             e.printStackTrace();
         }
 
-        HttpEntity<JSONObject> entity = new HttpEntity<>(jsonObject , headers);
-
-        restTemplate.postForObject(URI, "teststring", String.class);
+        String transferObject = score.getUsername() + ";" + score.getWord() + ";"
+            + score.getMistakes() + ";" + score.getScore() + ";" + score.getTimeNeeded();
+        restTemplate.postForObject(URI, transferObject, String.class);
     }
 
     public List<Score> getScores(int scores) {
