@@ -107,6 +107,8 @@ Die besten Scores können über den "Scores"-Button auf der Startseite angesehen
 
 Um die Hangman-Scores API zu benutzen, müssen HTTP-GET-Requests auf die URL der API abgesetzt werden.
 
+``` /score?size=5``` gibt die ersten 5 Spieler des Scoreboards zurück   
+
 ## Architektur
 ![Architektur-Bild][architecture]
 ## Technologien
@@ -118,9 +120,21 @@ Um die Hangman-Scores API zu benutzen, müssen HTTP-GET-Requests auf die URL der
 * GIT - Sourcecodeverwaltung
 ## Zusammenfassung
 ### Ergebnis
+Man kann gegeneinander Hangman spielen, die Wörter werden vorher auf Richtigkeit überprüft. Die gesamte Kommunikation zwischen Spelern und dem Server erfolgt über Websockets. Alle Informationen wie Fehler, geratene und eratene Buchtaben werden zwischen den Spielern in einem Raum (immer 2) synchronisiert. Haben beide Spieler das Spiel abgeschlossen, wird für jeden Spieler ein Score und der Gewinner angezeigt. Dann kann ein Spieler seinen Score speichern. Die 10 besten gespeicherten Scores können angesehen werden. Alle Scores werden in einer Datenbank abgelegt und sind über eine REST-API (gereiht nach Score) verfügbar.  
 ### Bekannte Probleme
+* Die Spiele werden in Räumen verwaltet. Sollten zu viele Räume gleichzeitig eröffnet/bespielt werden, kann es zu Speicherknappheit kommen. 
+* Die API für die Scores kann ohne Authentifizierung verwendet werden. Das birgt Gefahren für den Datenbestand und macht die API angreifbar für DDoS und andere Attacken
+* Jeder Spieler kann jeden Namen eingeben. Es gibt keine Anmeldefunktion, deshalb ist nicht wirklich nachvollziebar wer welchen Score erspielt hat.
+* Socketnachrichten werden immer an alle Spieler geschickt. Erst diese "hören" nur auf die Nachrichten, die Sie betreffen. Dadurch werden viele Daten an viele Spieler verschickt. Es gäbe die Möglichkeit pro Raum einen eigenen Nachrichtenservice zu erstellen.
+* Es kommt bei langen Wartezeiten zwischen Eingaben von Spielern zu Verbindungsabbrüchen beim Socket (>2 min).
 ### Weitere Möglichkeiten
+* Ausbau der API mit Authentifizeirung und umfangreicheren Statistiken.
+* Einbau einer Anmeldefunktion für User
+* Hangman-Spiele mit mehr als zwei Spieler in einem Raum. Der Hangman-Server besitzt diese Funktion, sie ist allerdinbgs nicht in die Benutzeroberfläche integriert.
+* Mögliche Übersetzung der Applikation in mehrere Sprachen. Zu ratente Wörter in mehreren Sprachen möglich.
+* Automatische Auswertung der Logs (z.B.: Logstash)
 ### Persönliche Menung / Erkenntnisse
+An diesem Projekt, bestehent aus zwei Applikationen und einer Datenbank erkennt man die Herausforderungen, die das Aufteilen von Anwendungsteilen über mehrere Server bringen. Die Übertragung der Scores zwischen Spiel und Score-Datenbank ist komplexer als in monolithischen Architekturen. Der Einsatz der WebSocket-Verbindung bringt die nötige Funktion Nachrichten vom Server zum Client zu schicken. Ohne diese wäre das Spielen nicht möglich.
 ## Anhang
 ### Sourcecode
 https://github.com/mtomberger/OnlineHangman/
