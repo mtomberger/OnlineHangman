@@ -109,7 +109,6 @@ public class HangmanController {
             }
             List<Player> finished = playedRoom.getFinishedPlayers();
             if(finished.size()>0){
-                logger.debug(finished.size()+" Player(s) finished in Room "+playedRoom.getId());
                 for(Player p : finished){
                     returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.FINISH,
                             p.getMistakes()+MESSAGE_DELIMITER+Player.MAX_MISTAKES+MESSAGE_DELIMITER+p.getWordToGuess(),
@@ -117,8 +116,10 @@ public class HangmanController {
                             p.getName()
                     ));
                 }
+                logger.info(finished.size()+"/"+playedRoom.getPlayerCount()+" Player(s) finished in Room "+playedRoom.getId());
                 if(finished.size()== playedRoom.getPlayerCount()){
                     String scores = playedRoom.getScores(MESSAGE_DELIMITER);
+                    logger.debug("All Players finished in Room "+playedRoom.getId()+ " -> showing Scores");
                     for(Player p : playedRoom.getPlayers()){
                         returnMessages.addMessage(new HangmanMessage(HangmanMessage.MessageType.SCORE,scores,p.getId(),p.getName()));
                     }

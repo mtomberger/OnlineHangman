@@ -77,14 +77,25 @@ public class Player {
     }
 
     private void checkFinished(){
+        String str = "";
+        for (Character c : guessedChars){
+            str += c.toString()+",";
+        }
+          str+=" ; ";
+
+        logger.info("Check for finished "+mistakes+"/"+MAX_MISTAKES + " "+str);
         if(mistakes > MAX_MISTAKES){
             logger.debug("Player "+getName()+" ("+getId()+") exceeded "+MAX_MISTAKES);
             setFinished();
         }
         ArrayList<Character> wordChars = new ArrayList<>();
-        for(char c : wordToGuess.toCharArray()){
+        for(char c : wordToGuess.toLowerCase().toCharArray()){
             wordChars.add(c);
         }
+        for (Character c : wordChars){
+            str += c.toString()+",";
+        }
+        logger.info("Guessed and word Chars: "+str);
         if(guessedChars.containsAll(wordChars)){
             logger.debug("Player "+getName()+" ("+getId()+") guessed right ("+getMistakes()+" mistakes)");
             setFinished();
@@ -141,6 +152,6 @@ public class Player {
         scoreNumber = getMistakes()>Player.MAX_MISTAKES?0:scoreNumber;
         String score = getId()+","+getName()+","+getMistakes()+","+Player.MAX_MISTAKES+","+timeTaken+","+getWordToGuess()+","+scoreNumber;
         logger.debug("PLAYER SCORE: "+score);
-        return new Score(getName(), getChoosenWord(), getMistakes(), (int) timeTaken, scoreNumber, LocalDate.now());
+        return new Score(getName(), getWordToGuess().toUpperCase(), getMistakes(), (int) timeTaken, scoreNumber, LocalDate.now());
     }
 }

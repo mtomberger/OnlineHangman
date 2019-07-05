@@ -18,7 +18,7 @@ var intervalId = 0;
 var currentScore = {};
 
 //disable logging
-console.log=function(){};
+//console.log=function(){};
 
 function connect(event) {
     username =$('#name').val().trim();
@@ -71,7 +71,7 @@ function onMessageReceived(message){
         var myWord = messagetext.split(MESSAGE_DELIMITER)[0];
         var enemyWord = messagetext.split(MESSAGE_DELIMITER)[1];
         createWordDisplay($('.player-container .word'),myWord);
-        createWordDisplay($('.enemy-container .word'),enemyWord,word);
+        createWordDisplay($('.enemy-container .word'),enemyWord,word.toUpperCase());
         initTyping();
     }
     if(message.type === 'FINISH'){
@@ -107,8 +107,9 @@ function onMessageReceived(message){
         });
         cont.empty();
         cont.append($("<h1>").text("Scores for this game"));
-        createScoreboard(cont,scoreObjs);
-        cont.append($('<button class="scores-button submit-scores">').text("Submit your Score"));
+        if(createScoreboard(cont,scoreObjs)){
+            cont.append($('<button class="scores-button submit-scores">').text("Submit your Score"));
+        }
         cont.append('<a href="/" class="back-button scores-button">Back</a>');
         cont.removeClass("hidden");
         $('.finish').addClass("hidden");
@@ -144,7 +145,14 @@ function onMessageReceived(message){
     }
 }
 function createScoreboard(board,scoreObjs){
+    console.log(scoreObjs);
+    var ableToSubmit = true;
     scoreObjs.sort(function(a,b){
+        a.score = parseFloat(a.score);
+        b.score = parseFloat(b.score);
+        a.time = parseFloat(a.time);
+        b.time = parseFloat(b.time);
+
         if(a.score<b.score){
             return 1;
         }
@@ -172,6 +180,9 @@ function createScoreboard(board,scoreObjs){
         if(scoreObjs[i].mistakes>scoreObjs[i].maxMistakes){
             mis = "too much";
             scoreItem.addClass("crossed");
+            if(scoreObjs[i].id == clientId){
+                ableToSubmit = false;
+            }
         }
         if(scoreObjs[i].id == clientId){
             scoreItem.append($("<td class='you'>").text(scoreObjs[i].player));
@@ -185,6 +196,7 @@ function createScoreboard(board,scoreObjs){
         table.append(scoreItem);
     }
     board.append(table);
+    return ableToSubmit;
 }
 function onMessagesReceived(payload) {
     var receivedMessages = JSON.parse(payload.body);

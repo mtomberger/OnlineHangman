@@ -17,7 +17,7 @@ import java.util.*;
 
 public class HangmanDBService {
 
-    public static final String URI = "http://localhost:8090/score";
+    public static final String URI = "http://192.168.43.135:8090/score";
 
     @Autowired
     private RestTemplate restTemplate;

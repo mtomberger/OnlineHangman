@@ -28,7 +28,10 @@ public class ScoreController {
         }
         if(player!=null){
             Score calcScore = player.getScoreObject();
-            hangmanDBService.addScore(calcScore);
+            if(Player.MAX_MISTAKES>=calcScore.getMistakes() && calcScore.getScore()>0){
+                hangmanDBService.addScore(calcScore);
+            }
+
         }
         return getTopScores();
     }
