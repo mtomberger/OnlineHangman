@@ -70,8 +70,12 @@ __Setup__
 3. SQL in \HangmanDB\src\main\resources\sql\hangman.sql auf "hangmandb" ausführen  
 
 __Starten__
-1. Hangman (Applikation) starten: \HangmanGame\src\main\java\at\hangman\hangman\HangmanApplication
-2. HangmanDB (API) starten: \HangmanDB\src\main\java\hangmandb\hangmandb\HangmandbApplication
+1. Hangman (Applikation) starten: \HangmanGame\src\main\java\at\hangman\hangman\HangmanApplication    
+   Commandline: Im HangmanGame-Ordner 
+   ``` mvn org.springframework.boot:spring-boot-maven-plugin:run ``` ausführen
+2. HangmanDB (API) starten: \HangmanDB\src\main\java\hangmandb\hangmandb\HangmandbApplication    
+   Commandline: Im HangmanDB-Ordner 
+   ``` mvn org.springframework.boot:spring-boot-maven-plugin:run ``` ausführen
 3. Ports: Applikation: 8080, API: 8081  
 
 ## Anleitung
