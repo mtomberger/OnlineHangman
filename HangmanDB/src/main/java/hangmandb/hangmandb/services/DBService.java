@@ -26,7 +26,7 @@ public class DBService {
     }
 
     public List<Score> getScoreBoard(int size) {
-        TypedQuery<Score> q2 = manager.createQuery("SELECT g FROM game g", Score.class);
+        TypedQuery<Score> q2 = manager.createQuery("SELECT g FROM game g ORDER BY g.score DESC", Score.class);
         q2.setMaxResults(size);
 
         return q2.getResultList();
