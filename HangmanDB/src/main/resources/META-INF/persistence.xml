@@ -2,8 +2,7 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="unithangman">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>entities.Game</class>
-        <class>entities.Player</class>
+        <class>entities.Score</class>
         <properties>
             <property name="javax.persistence.jdbc.default_schema" value="sequence"></property>
             <property name="javax.persistence.jdbc.driver"

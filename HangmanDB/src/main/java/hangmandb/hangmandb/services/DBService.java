@@ -1,7 +1,6 @@
 package hangmandb.hangmandb.services;
 
-import entities.Game;
-import entities.Player;
+import entities.Score;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,22 +18,15 @@ public class DBService {
         transaction = manager.getTransaction();
     }
 
-    public Player addPlayer(Player player) {
+    public Score addGame(Score score) {
         transaction.begin();
-        manager.persist(player);
+        manager.persist(score);
         transaction.commit();
-        return player;
+        return score;
     }
 
-    public Game addGame(Game game) {
-        transaction.begin();
-        manager.persist(game);
-        transaction.commit();
-        return game;
-    }
-
-    public List<Game> getScoreBoard(int size) {
-        TypedQuery<Game> q2 = manager.createQuery("SELECT g FROM Game g", Game.class);
+    public List<Score> getScoreBoard(int size) {
+        TypedQuery<Score> q2 = manager.createQuery("SELECT g FROM game g", Score.class);
         q2.setMaxResults(size);
 
         return q2.getResultList();

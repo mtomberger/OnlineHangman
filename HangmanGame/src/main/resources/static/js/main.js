@@ -2,7 +2,7 @@
 
 var gamePage = $('.game-board');
 var joinPage = $('.gamestart-board');
-var scorePage = $('score-board');
+var scorePage = $('.score-board');
 var loadingOverlay = $('.loading');
 var roominfo = $('#roominfo');
 var enemyinfo = $('#enemy-info');
@@ -15,6 +15,7 @@ var word = null;
 var clientId = generateGuid();
 var MESSAGE_DELIMITER = '#;#';
 var intervalId = 0;
+var currentScore = {};
 
 //disable logging
 console.log=function(){};
@@ -63,6 +64,7 @@ function onMessageReceived(message){
     if(message.type === 'JOIN'){
         var messagetext = message.content;
         enemyinfo.text(messagetext);
+        showPage(gamePage);
     }
     if(message.type === 'INIT'){
         var messagetext = message.content;
@@ -104,8 +106,10 @@ function onMessageReceived(message){
             };
         });
         cont.empty();
+        cont.append($("<h1>").text("Scores for this game"));
         createScoreboard(cont,scoreObjs);
-        cont.append($('<button class="scores-button">').text("Submit your Score"));
+        cont.append($('<button class="scores-button submit-scores">').text("Submit your Score"));
+        cont.append('<a href="/" class="back-button scores-button">Back</a>');
         cont.removeClass("hidden");
         $('.finish').addClass("hidden");
         $('.finish-success').addClass("hidden");
@@ -152,7 +156,6 @@ function createScoreboard(board,scoreObjs){
         }
         return -1;
     });
-    board.append($("<h1>").text("Scores for this game"));
     var table=$("<table class='score-table'>");
     var headerRow = $("<tr>");
     headerRow.append($("<th>").text("Place"));
@@ -332,9 +335,50 @@ joinPage.on('submit', connect);
 $("#word").on('keydown',function(e){
     return (/[A-Za-z]/.test(e.key.substr(0,1)));
 });
-$('body').on('click','.scores-button',function(){
-    //TODO load score page
-    roominfo.text("Top scores");
-    createScoreboard(scorePage,[]);
-    showPage(scorePage);
+$('body').on('click','.show-scores',function(){
+    $.ajax({
+        type: "GET",
+        url: "/scores",
+        contentType: "application/json",
+        cache: false,
+        timeout: 600000,
+        dataType: "json",
+        success: function(result) {
+            roominfo.text("Top scores");
+            for(var i=0; i<result.length;i++){
+                result[i].player = result[i].username;
+                result[i].maxMistakes = 10;
+                result[i].time = result[i].timeNeeded;
+            }
+            createScoreboard(scorePage,result);
+            scorePage.append('<a href="/" class="back-button scores-button">Back</a>');
+            showPage(scorePage);
+        },
+        error: function (response) {
+        }
+    });
+});
+$('body').on('click','.submit-scores',function(){
+    $.ajax({
+        type: "POST",
+        url: "/scores?id="+encodeURIComponent(clientId),
+        data: { "id": clientId },
+        contentType: "application/json",
+        cache: false,
+        timeout: 600000,
+        dataType: "json",
+        success: function(result) {
+            roominfo.text("Top scores");
+            for(var i=0; i<result.length;i++){
+                result[i].player = result[i].username;
+                result[i].maxMistakes = 10;
+                result[i].time = result[i].timeNeeded;
+            }
+            createScoreboard(scorePage,result);
+            scorePage.append('<a href="/" class="back-button scores-button">Back</a>');
+            showPage(scorePage);
+        },
+        error: function (response) {
+        }
+    });
 });

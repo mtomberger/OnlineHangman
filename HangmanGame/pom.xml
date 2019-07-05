@@ -46,6 +46,11 @@
             <version>2.1.5.RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

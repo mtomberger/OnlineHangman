@@ -129,8 +129,10 @@ h3{
     line-height: 20px;
     font-size: 16px;
 }
-span.score-tiem {}
-.score-container {
+.score-board{
+    font-size: 30px;
+}
+.score-container{
     position: absolute;
     top: 0;
     left:  0;
@@ -145,6 +147,17 @@ span.score-tiem {}
     height:  50px;
     line-height: 30px;
     font-size: 26px;
+}
+.score-container a.back-button{
+    height: 30px;
+    width: 150px;
+    margin-top: 15px;
+}
+a.back-button{
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+    line-height: 30px;
 }
 
 table.score-table {

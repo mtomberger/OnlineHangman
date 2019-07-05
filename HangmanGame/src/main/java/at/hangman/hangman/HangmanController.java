@@ -4,6 +4,9 @@ import at.hangman.exception.GuessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,6 +14,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -22,9 +26,10 @@ import java.util.*;
 @Controller
 public class HangmanController {
 
-    private List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = RoomWrapper.getRooms();
     private final String MESSAGE_DELIMITER="#;#";
     private static final Logger logger = LoggerFactory.getLogger(HangmanController.class);
+
 
     @MessageMapping("/hangman.addUser")
     @SendTo("/hangman/public")
@@ -35,7 +40,7 @@ public class HangmanController {
 
         String checkJson = getWordCheckJson(word);
         if(!checkForAllowedWord(checkJson,word)){
-            logger.info("'"+word+"' by "+username+" is not a valid word");
+            logger.error("'"+word+"' by "+username+" is not a valid word");
             hangmanMessage.setType(HangmanMessage.MessageType.ERROR);
             hangmanMessage.setContent("We can't find your Word in the dictionary");
             return new ClientMessage(hangmanMessage);
@@ -136,6 +141,23 @@ public class HangmanController {
 
 
     }
+
+    @MessageMapping("/hangman.getScoreBoard")
+    @SendTo("/hangman/public")
+    public ClientMessage addScore(@Payload ClientMessage clientMessage, SimpMessageHeaderAccessor headerAccessor) {
+        HangmanMessage hangmanMessage = clientMessage.getFirstMessage();
+
+        if(!HangmanMessage.MessageType.SCOREINFO.equals(hangmanMessage.getType())) {
+            logger.error("Bad Request for score board");
+            hangmanMessage.setType(HangmanMessage.MessageType.ERROR);
+            hangmanMessage.setContent("Bad Request for score board");
+            return new ClientMessage(hangmanMessage);
+        }
+
+        Room room = rooms.stream().filter(r -> null != r.getPlayer(hangmanMessage.getSenderId())).findFirst().get();
+        return null;
+    }
+
     private boolean checkForAllowedWord(String wordsJson,String word){
         if(wordsJson==null){
            return false;
@@ -153,6 +175,7 @@ public class HangmanController {
         String finalWord = word;
         return words.stream().anyMatch(w -> w.isNoun() && w.getWord().toLowerCase().equals(finalWord));
     }
+
     private String getWordCheckJson(String word){
         word = word.toLowerCase();
         if(word.length() < 3){
