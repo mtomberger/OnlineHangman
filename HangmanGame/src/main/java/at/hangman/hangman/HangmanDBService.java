@@ -62,12 +62,16 @@ public class HangmanDBService {
             String word = (String) e.get("word");
             int mistakes = (int) e.get("mistakes");
             int timeNeeded = (int) e.get("timeNeeded");
-            int score  = (int) e.get("timeNeeded");
+            int score  = (int) e.get("score");
 
             String dateTimeStr = (String) e.get("timestamp");
-            String dateStr = dateTimeStr.substring(0, 10);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate date = LocalDate.parse(dateStr, formatter);
+            LocalDate date = LocalDate.MIN;
+            if(dateTimeStr !=null){
+                String dateStr = dateTimeStr.substring(0, 10);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(dateStr, formatter);
+            }
+
 
             Score newScore = new Score(id, username, word, mistakes, timeNeeded, score, date);
             scores.add(newScore);
